@@ -1,0 +1,19 @@
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+
+alias npmup='npm install npm -g; npm update -g;'
+alias rubyup='sudo gem update --system; sudo gem update; sudo gem cleanup'
+
+alias ncdu='ncdu --color dark --follow-firmlinks'
+
+alias ydl='youtube-dl'
+alias ydl-a='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
+alias youtube-dl-audio='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
+
+eval $(thefuck --alias)
+
+alias aaa='fuck'
+
+alias nom='npm' # Because I always type it wrong

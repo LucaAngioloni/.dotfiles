@@ -1,0 +1,187 @@
+server(){
+    local usage="Usage: server [auth <user> <pssw> | php [local(host)|ip] | python [upload] | refresh]"
+    if [[ $# == 0 ]]; then
+        python3 -m http.server
+    else
+        if [[ $# != 0 ]]; then
+            if [[ $1 == "php" ]]; then
+                if [[ $# == 1 ]]; then
+                    php -S localhost:8000
+                else
+                    if [[ $2 == "local" ]]; then
+                        php -S localhost:8000
+                    elif [[ $2 == "localhost" ]]; then
+                        php -S localhost:8000
+                    elif [[ $2 == "ip" ]]; then
+                        php -S $(ipconfig getifaddr en0):8000 # automatically gets IP but only if connected to network
+                    else
+                        echo $usage
+                    fi
+                fi
+            elif [[ $1 == "python" ]]; then
+                if [[ $# == 1 ]]; then
+                    python3 -m http.server
+                else
+                    if [[ $2 == "upload" ]]; then
+                        /usr/bin/python ~/.scripts/python_server.py
+                    else
+                        python3 -m http.server
+                    fi
+                fi
+            elif [[ $1 == "auth" ]]; then
+                if [[ $# == 1 ]]; then
+                    echo $usage
+                else
+                    http-server-with-auth ./ --username $2 --password $3
+                fi
+            elif [[ $1 == "refresh" ]]; then
+                browser-sync start -s -f . --no-notify --host $(ipconfig getifaddr en0) --port 9000
+            else
+                echo $usage
+            fi
+        else
+            python3 -m http.server
+        fi
+    fi
+}
+
+
+# read markdown files as a man page
+mdread(){
+    grep -v "\-\-\-\-\-" "$*" | pandoc -s -f markdown -t man | groff -T utf8 -man | less
+}
+
+# create .tar.gz
+targz() { tar -zcvf $1.tar.gz $1; rm -r $1; }
+# extract .tar.gz
+untargz() { tar -zxvf $1; rm -r $1; }
+
+# Determine size of a file or total size of a directory
+function fs() {
+	if du -b /dev/null > /dev/null 2>&1; then
+		local arg=-sbh;
+	else
+		local arg=-sh;
+	fi
+	if [[ -n "$@" ]]; then
+		du $arg -- "$@";
+	else
+		du $arg .[^.]* ./*;
+	fi;
+}
+
+#update zshrc
+rezsh(){
+    cd ~;
+    source .zshrc;
+    cd -;
+}
+
+fcount(){
+    find $1 -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r
+}
+
+dirsize () {
+    du -shx * .[a-zA-Z0-9_]* 2> /dev/null | \
+    egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
+    egrep '^ *[0-9.]*M' /tmp/list
+    egrep '^ *[0-9.]*G' /tmp/list
+    rm -rf /tmp/list
+}
+
+# Cat json files in a pretty way
+jsoncat(){
+    cat $1 | python -m json.tool
+}
+
+# preview csv files. source: http://stackoverflow.com/questions/1875305/command-line-csv-viewer
+function csvcat(){
+      sed 's/,,/, ,/g;s/,,/, ,/g' "$@" | column -s, -t | less -#2 -N -S
+}
+
+# Upload to tmp site
+upload(){
+    curl --progress-bar -F"file=@$1" https://0x0.st
+}
+
+# Upload to transfer.sh
+transfer(){if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;}
+
+# find shorthand
+function f() {
+	find . -name "$1" 2>&1 | grep -v 'Permission denied'
+}
+
+# Copy w/ progress
+cp_p () {
+  rsync -WavP --human-readable --progress $1 $2
+}
+
+# Generate random password
+psw () {
+    local usage="Usage: psw [<num_chars> ['alphanumeric' | '-a'] | 'alphanumeric' | '-a']\n\nExamples:\n  $ psw\n  $ psw 8\n  $ psw 14 -a\n  $ psw -a"
+    if [[ $# == 0 ]]; then
+        LC_ALL=C tr -dc 'A-Za-z0-9!#@-+*_$%&' </dev/urandom | head -c 15 ; echo ''
+    else
+        if [[ $# == 1 ]]; then
+            if [[ $1 == "help" ]]; then
+                echo $usage
+            elif [[ $1 == "alphanumeric" ]]; then
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 15 ; echo ''
+            elif [[ $1 == "-a" ]]; then
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 15 ; echo ''
+            else
+                LC_ALL=C tr -dc 'A-Za-z0-9!#@-+*_$%&' </dev/urandom | head -c $1 ; echo ''
+            fi
+        else
+            if [[ $2 == "alphanumeric" ]]; then
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c $1 ; echo ''
+            elif [[ $2 == "-a" ]]; then
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c $1 ; echo ''
+            else
+                LC_ALL=C tr -dc 'A-Za-z0-9!#@-+*_$%&' </dev/urandom | head -c $1 ; echo ''
+            fi
+        fi
+    fi
+}
+
+# animated gifs from any video
+# from alex sexton   gist.github.com/SlexAxton/4989674
+gifify() {
+  if [[ -n "$1" ]]; then
+    if [[ $2 == '--good' ]]; then
+      ffmpeg -i "$1" -r 10 -vcodec png out-static-%05d.png
+      time convert -verbose +dither -layers Optimize -resize 900x900\> out-static*.png  GIF:- | gifsicle --colors 128 --delay=5 --loop --optimize=3 --multifile - > "$1.gif"
+      rm out-static*.png
+    else
+      ffmpeg -i "$1" -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$1.gif"
+    fi
+  else
+    echo "proper usage: gifify <input_movie.mov>. You DO need to include extension."
+  fi
+}
+
+# turn that video into webm.
+# brew reinstall ffmpeg --with-libvpx
+webmify(){
+    ffmpeg -i "$1" -vcodec libvpx -acodec libvorbis -isync -copyts -aq 80 -threads 3 -qmax 30 -y "$2" "$1.webm"
+}
+
+if [ "$PLATFORM"  = 'mac' ]; then
+    # Find startup and daemon plist
+    launchctlFind () {
+        LaunchctlPATHS=( \
+            ~/Library/LaunchAgents \
+            /Library/LaunchAgents \
+            /Library/LaunchDaemons \
+            /System/Library/LaunchAgents \
+            /System/Library/LaunchDaemons \
+        )
+
+        for curPATH in "${LaunchctlPATHS[@]}"
+        do
+            grep -R "$curPATH" -e "$1"
+        done
+        return 0;
+    }
+fi

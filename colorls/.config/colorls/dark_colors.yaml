@@ -1,0 +1,123 @@
+# Main Colors
+unrecognized_file: red
+recognized_file:   green
+dir:               blue
+
+# Link
+dead_link: darkred
+link:      cyan
+
+# Access Modes
+write:     yellow
+read:      green
+exec:      red
+no_access: indianred
+
+# Age
+day_old:     yellow
+hour_old:    red
+no_modifier: white
+
+# File Size
+file_large:  red
+file_medium: yellow
+file_small:  white
+
+# Random
+report: white
+user:   floralwhite
+tree:   floralwhite
+empty:  yellow
+error:  red
+normal: floralwhite
+
+# Git
+addition:     chartreuse
+modification: darkkhaki
+deletion:     darkred
+untracked:    darkorange
+unchanged:    forestgreen
+
+
+
+# # Main Colors
+# unrecognized_file: red
+# recognized_file:   green
+# dir:               blue
+
+# # Link
+# dead_link: darkred
+# link:      cyan
+
+# # Access Modes
+# write:     darkkhaki
+# read:      limegreen
+# exec:      red
+# no_access: indianred
+
+# # Age
+# day_old:     mediumspringgreen
+# hour_old:    lime
+# no_modifier: seagreen
+
+# # File Size
+# file_large:  orange
+# file_medium: gold
+# file_small:  peachpuff
+
+# # Random
+# report: white
+# user:   moccasin
+# tree:   cyan
+# empty:  yellow
+# error:  red
+# normal: darkkhaki
+
+# # Git
+# addition:     chartreuse
+# modification: darkkhaki
+# deletion:     darkred
+# untracked:    darkorange
+# unchanged:    forestgreen
+
+
+
+# # Main Colors
+# unrecognized_file: lightgray
+# recognized_file:   white
+# dir:               blue
+
+# # Link
+# dead_link: red
+# link:      magenta
+
+# # Access Modes
+# write:     yellow
+# read:      gray
+# exec:      red
+# no_access: dimgray
+
+# # Age
+# day_old:     lightgray
+# hour_old:    white
+# no_modifier: darkgray
+
+# # File Size
+# file_large:  white
+# file_medium: lightgray
+# file_small:  darkgray
+
+# # Random
+# report: white
+# user:   cyan
+# tree:   dimgray
+# empty:  yellow
+# error:  red
+# normal: darkgray
+
+# # Git
+# addition:     green
+# modification: yellow
+# deletion:     red
+# untracked:    darkgray
+# unchanged:    white

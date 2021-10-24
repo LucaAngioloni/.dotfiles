@@ -1,0 +1,6 @@
+.git
+.gitignore
+.stow-local-ignore
+install.sh
+term/
+README.*
