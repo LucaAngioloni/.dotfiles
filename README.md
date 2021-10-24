@@ -76,6 +76,13 @@ OSX:
 brew install stow
 ```
 
+To install the dotfiles, first backup and remove all the dotfiles already there (otherwise stow will not work), then:
+
+```bash
+stow -R */
+stow -D term # the term folder should not be stowed
+```
+
 ## Sync
 
 Use git
