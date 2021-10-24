@@ -17,3 +17,5 @@ eval $(thefuck --alias)
 alias aaa='fuck'
 
 alias nom='npm' # Because I always type it wrong
+
+alias jupyter-lab='jupyter lab --no-browser --ip "*"'
