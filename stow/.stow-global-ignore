@@ -1,6 +1,9 @@
 .git
 .gitignore
 .stow-local-ignore
+
+.DS_Store
+
 install.sh
 term/
 README.*

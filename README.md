@@ -60,6 +60,20 @@ Install gem:
 gem install colorls
 ```
 
+### The Fuck
+
+OSX:
+
+```bash
+brew install thefuck
+```
+
+Debian:
+
+```bash
+pip3 install thefuck --user
+```
+
 ### Stow
 
 Install [GNU stow](http://www.gnu.org/software/stow/).
