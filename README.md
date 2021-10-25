@@ -62,33 +62,60 @@ gem install colorls
 
 ### The Fuck
 
-OSX:
+#### OSX
 
 ```bash
 brew install thefuck
 ```
 
-Debian:
+#### Debian
 
 ```bash
 pip3 install thefuck --user
+```
+
+### FZF
+
+#### OSX
+
+```bash
+brew install fzf
+
+# To install useful key bindings and fuzzy completion (run once):
+$(brew --prefix)/opt/fzf/install
+```
+
+##### Uninstall
+
+```bash
+$(brew --prefix)/opt/fzf/uninstall
+
+brew uninstall fzf
+```
+
+#### Debian
+
+```bash
+sudo apt-get install fzf
 ```
 
 ### Stow
 
 Install [GNU stow](http://www.gnu.org/software/stow/).
 
-Debian:
+#### Debian
 
 ```bash
 sudo apt-get install stow
 ```
 
-OSX:
+#### OSX
 
 ```bash
 brew install stow
 ```
+
+### Install dotfiles in your system
 
 To install the dotfiles, first backup and remove all the dotfiles already there (otherwise stow will not work), then:
 
@@ -99,4 +126,6 @@ stow -D term # the term folder should not be stowed
 
 ## Sync
 
-Use git
+Use git to push and pull.
+
+If the changes are on the existing files they should be applied immediately, otherwise if you add new "folders" or files, redo the Stow process.

@@ -96,12 +96,12 @@ plugins=(
   history # aliases: h -> history,  hs -> history | grep, hsi -> history | grep -i
   thefuck # press esc twice to activate thefuck
   transfer # use transfer + file/dir to upload to transfer.sh
+  # zsh-interactive-cd # to use fzf when double tab on cd instead of the default
   # git # aliases
   # tmux # aliases and functions
   # python # aliases
   # emoji
   # per-directory-history
-  # zsh-interactive-cd
 )
 
 # zsh-completions

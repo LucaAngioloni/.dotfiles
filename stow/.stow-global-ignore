@@ -6,4 +6,7 @@
 
 install.sh
 term/
+
+.*.itermcolors
+
 README.*
