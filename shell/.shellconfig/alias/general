@@ -14,7 +14,7 @@ alias youtube-dl-audio='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" 
 
 eval $(thefuck --alias)
 
-alias aaa='fuck'
+alias aaa='fuck' # also use esc twice with the thefuck ohmyzsh plugin
 
 alias nom='npm' # Because I always type it wrong
 

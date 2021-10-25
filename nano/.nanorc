@@ -2,7 +2,7 @@
 set autoindent
 set titlecolor white,normal
 set tabsize 4
-set smooth
+# set smooth
 set linenumbers
 set numbercolor yellow,normal
-#include /usr/local/share/nano/*.nanorc
+# include /usr/local/share/nano/*.nanorc

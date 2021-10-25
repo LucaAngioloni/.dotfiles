@@ -83,24 +83,32 @@ plugins=(
   zsh-completions
   zsh-autosuggestions
   zsh-syntax-highlighting
-  git
-  colorize
+  colorize # ccat and cless: print with sintax highlighting
   colored-man-pages
-  cp
-  urltools
-  tmux
+  cp # adds the cpv command (rsync below) to copy files with progress bar and all other features of rsync
+  urltools # urlencode and urldecode strings
   z
-  dirhistory
-  emoji
-  encode64
-  python
-  pip
-  docker
-  docker-compose
-)# Add history-substring-search if you want to get commands from history that match the substring entered.
+  dirhistory # move through dirs with alt + arrow (alt + up goes to parent directory, alt + left moves back to the las dir and so on...)
+  encode64 # encode64 (e64) and decode64 (d64)
+  pip # tab complete on pip install and a few aliases
+  docker # autocompletion for docker
+  docker-compose # autocompletion for docker and a few aliases
+  history # aliases: h -> history,  hs -> history | grep, hsi -> history | grep -i
+  thefuck # press esc twice to activate thefuck
+  transfer # use transfer + file/dir to upload to transfer.sh
+  # git # aliases
+  # tmux # aliases and functions
+  # python # aliases
+  # emoji
+  # per-directory-history
+  # zsh-interactive-cd
+)
 
 # zsh-completions
 autoload -U compinit && compinit
 
 #Start oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# This is needed with the tmux plugin active, otherwise writing `tmux` alone will do `tmux a` and not create a new window.
+# ZSH_TMUX_AUTOCONNECT=false
