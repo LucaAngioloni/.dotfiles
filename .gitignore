@@ -2,3 +2,5 @@
 shell/.shellconfig/alias/ssh
 
 .DS_Store
+
+.vscode
