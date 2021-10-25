@@ -99,6 +99,18 @@ brew uninstall fzf
 sudo apt-get install fzf
 ```
 
+Add `~/.fzf.zsh` with this:
+
+```bash
+# Auto-completion
+# ---------------
+source /usr/share/doc/fzf/examples/completion.zsh
+
+# Key bindings
+# ------------
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+```
+
 ### Stow
 
 Install [GNU stow](http://www.gnu.org/software/stow/).

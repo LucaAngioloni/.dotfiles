@@ -1,1 +1,4 @@
 source ~/.fzf.zsh
+
+# On Mac this file is created upon installation
+# On debian it needs to be created (see the README.md)
