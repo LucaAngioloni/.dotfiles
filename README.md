@@ -121,7 +121,6 @@ To install the dotfiles, first backup and remove all the dotfiles already there 
 
 ```bash
 stow -R */
-stow -D term # the term folder should not be stowed
 ```
 
 ## Sync
