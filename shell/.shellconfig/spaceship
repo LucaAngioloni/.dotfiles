@@ -27,4 +27,6 @@ SPACESHIP_GCLOUD_SHOW=false # Hide GCloud project
 SPACESHIP_KUBECTL_SHOW=false # to hide kubernetes config
 SPACESHIP_KUBECTL_VERSION_SHOW=false
 SPACESHIP_KUBECONTEXT_SHOW=false
+
+# SPACESHIP_EXIT_CODE_SHOW=true
 #-----------------------------------------
