@@ -21,7 +21,8 @@ SPACESHIP_DIR_PREFIX=""
 # To match color of colorls
 SPACESHIP_DIR_COLOR="blue"
 
-SPACESHIP_DIR_TRUNC_REPO=false # to fix some problem with spaces in git folders
+SPACESHIP_GCLOUD_SHOW=false # Hide GCloud project
+# SPACESHIP_DIR_TRUNC_REPO=false # to fix some problem with spaces in git folders
 
 SPACESHIP_KUBECTL_SHOW=false # to hide kubernetes config
 SPACESHIP_KUBECTL_VERSION_SHOW=false
