@@ -1,4 +1,55 @@
-source ~/.fzf.zsh
+# fzf's command
+export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
+# CTRL-T's command
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# ALT-C's command
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+
+export FZF_DEFAULT_OPTS="
+--layout=reverse
+--height=80%
+--info=inline
+--multi
+--preview '([[ -f {} ]] && (bat --style=numbers,changes --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -600'
+--bind '?:toggle-preview'
+"
 
 # On Mac this file is created upon installation
 # On debian it needs to be created (see the README.md)
+source ~/.fzf.zsh
+
+# for more info see fzf/shell/completion.zsh
+_fzf_compgen_path() {
+    fd . "$1"
+}
+_fzf_compgen_dir() {
+    fd --type d . "$1"
+}
+
+# make z without anything show with fzf
+unalias z 2> /dev/null
+z() {
+    [ $# -gt 0 ] && _z "$*" && return
+    cd "$(_z -l 2>&1 | fzf --preview-window=:hidden --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
+# remap keybindings
+bindkey '\ec' fzf-file-widget
+bindkey '^T' fzf-cd-widget
+
+
+# export FZF_DEFAULT_OPTS="
+# --layout=reverse
+# --info=inline
+# --height=80%
+# --multi
+# --preview-window=:hidden
+# --preview '([[ -f {} ]] && (bat --style=numbers,changes --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -600'
+# --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+# --prompt='∼ ' --pointer='▶' --marker='✓'
+# --bind '?:toggle-preview'
+# --bind 'ctrl-a:select-all'
+# --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+# --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+# --bind 'ctrl-v:execute(code {+})'
+# "

@@ -74,6 +74,50 @@ brew install thefuck
 pip3 install thefuck --user
 ```
 
+### fd
+
+#### OSX
+
+```bash
+brew install fd
+```
+
+#### Debian
+
+```bash
+sudo apt install fd-find
+```
+
+### Tree
+
+#### OSX
+
+```bash
+brew install tree
+```
+
+#### Debian
+
+```bash
+sudo apt-get install tree
+```
+
+### Bat
+
+#### OSX
+
+```bash
+brew install bat
+```
+
+#### Debian
+
+```bash
+sudo apt-get install bat
+```
+
+or refer to the [documentation](https://github.com/sharkdp/bat#installation)
+
 ### FZF
 
 #### OSX
