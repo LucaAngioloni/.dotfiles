@@ -86,7 +86,12 @@ brew install fd
 
 ```bash
 sudo apt install fd-find
+
+# If fd is not available in PATH (because it is called fdfind)
+ln -s $(which fdfind) ~/.local/bin/fd
 ```
+
+or refer to the [documentation](https://github.com/sharkdp/fd#installation)
 
 ### Tree
 
@@ -114,6 +119,10 @@ brew install bat
 
 ```bash
 sudo apt-get install bat
+
+# If bat is not available and it is instead batcat
+mkdir -p ~/.local/bin
+ln -s /usr/bin/batcat ~/.local/bin/bat
 ```
 
 or refer to the [documentation](https://github.com/sharkdp/bat#installation)
