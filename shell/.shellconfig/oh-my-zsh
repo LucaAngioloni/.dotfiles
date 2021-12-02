@@ -83,6 +83,9 @@ plugins=(
   # per-directory-history
 )
 
+# Fix slow paste
+DISABLE_MAGIC_FUNCTIONS=true
+
 # zsh-completions
 autoload -U compinit && compinit
 
