@@ -2,8 +2,12 @@
 export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
 # CTRL-T's command
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_CTRL_T_OPTS=""
 # ALT-C's command
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+# export FZF_ALT_C_OPTS=""
+
+export FZF_CTRL_R_OPTS="--preview-window=:hidden"
 
 export FZF_DEFAULT_OPTS="
 --layout=reverse
