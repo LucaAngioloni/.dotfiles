@@ -545,6 +545,8 @@
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=
+
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_CONTENT_EXPANSION='%B${P9K_CONTENT}'
   # Custom prefix.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='%B%ftook '
 
@@ -866,7 +868,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%B%fwith '
+  typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%B%at '
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
@@ -880,6 +882,8 @@
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
   typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION='%fvia %F{blue}'
+  # Bold content
+  typeset -g POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   #####################[ anaconda: conda environment (https://conda.io/) ]######################
   # Anaconda environment color.
@@ -952,6 +956,8 @@
   typeset -g POWERLEVEL9K_GOENV_SHOW_SYSTEM=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_GOENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # Bold content
+  typeset -g POWERLEVEL9K_GOENV_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   ##########[ nodenv: node.js version from nodenv (https://github.com/nodenv/nodenv) ]##########
   # Nodenv color.
@@ -965,12 +971,16 @@
   typeset -g POWERLEVEL9K_NODENV_SHOW_SYSTEM=true
   # Custom icon.
   typeset -g POWERLEVEL9K_NODENV_VISUAL_IDENTIFIER_EXPANSION='%B%fvia %F{green}'
+  # Bold content
+  typeset -g POWERLEVEL9K_NODENV_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
   # Nvm color.
   typeset -g POWERLEVEL9K_NVM_FOREGROUND=2
   # Custom icon.
   typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='%B%fvia %F{green}'
+  # Bold content
+  typeset -g POWERLEVEL9K_NVM_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   ############[ nodeenv: node.js environment (https://github.com/ekalinin/nodeenv) ]############
   # Nodeenv color.
@@ -981,6 +991,8 @@
   typeset -g POWERLEVEL9K_NODEENV_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
   typeset -g POWERLEVEL9K_NODEENV_VISUAL_IDENTIFIER_EXPANSION='%B%fvia %F{green}'
+  # Bold content
+  typeset -g POWERLEVEL9K_NODEENV_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   ##############################[ node_version: node.js version ]###############################
   # Node version color.
@@ -990,7 +1002,8 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='%fvia %F{green}⬢'
   typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='%B%fvia %F{green}'
-  # typeset -g POWERLEVEL9K_NODE_VERSION_CONTENT_EXPANSION='%B'
+  # Bold content
+  typeset -g POWERLEVEL9K_NODE_VERSION_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
@@ -999,6 +1012,8 @@
   typeset -g POWERLEVEL9K_GO_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_GO_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # Bold content
+  typeset -g POWERLEVEL9K_GO_VERSION_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
   # Rust version color.
@@ -1023,6 +1038,8 @@
   typeset -g POWERLEVEL9K_PHP_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_PHP_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # Bold content
+  typeset -g POWERLEVEL9K_PHP_VERSION_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   ##########[ laravel_version: laravel php framework version (https://laravel.com/) ]###########
   # Laravel version color.
@@ -1039,6 +1056,8 @@
   typeset -g POWERLEVEL9K_JAVA_VERSION_FULL=false
   # Custom icon.
   # typeset -g POWERLEVEL9K_JAVA_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # Bold content
+  typeset -g POWERLEVEL9K_JAVA_VERSION_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   ###[ package: name@version from package.json (https://docs.npmjs.com/files/package.json) ]####
   # Package color.
@@ -1051,6 +1070,8 @@
   # typeset -g POWERLEVEL9K_PACKAGE_CONTENT_EXPANSION='${P9K_PACKAGE_NAME//\%/%%}@${P9K_PACKAGE_VERSION//\%/%%}'
   # Custom icon.
   typeset -g POWERLEVEL9K_PACKAGE_VISUAL_IDENTIFIER_EXPANSION='%B%fis %F{red}'
+  # Bold content
+  typeset -g POWERLEVEL9K_PACKAGE_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   #############[ rbenv: ruby version from rbenv (https://github.com/rbenv/rbenv) ]##############
   # Rbenv color.
@@ -1080,6 +1101,8 @@
   typeset -g POWERLEVEL9K_FVM_FOREGROUND=4
   # Custom icon.
   # typeset -g POWERLEVEL9K_FVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # Bold content
+  typeset -g POWERLEVEL9K_FVM_CONTENT_EXPANSION='%B${P9K_CONTENT}'
 
   ##########[ luaenv: lua version from luaenv (https://github.com/cehoffman/luaenv) ]###########
   # Lua color.
