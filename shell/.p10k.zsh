@@ -70,7 +70,7 @@
     command_execution_time  # duration of the last command
     # =========================[ Line #2 ]=========================
     newline                 # \n
-    # battery
+    battery
     prompt_char             # prompt symbol
   )
 
@@ -1522,8 +1522,10 @@
 
   ################################[ battery: internal battery ]#################################
   # Show battery in red when it's below this level and not connected to power supply.
-  typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
+  typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=15
   typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=9
+  # Don't show battery if it's at or above this charge level.
+  typeset -g POWERLEVEL9K_BATTERY_HIDE_ABOVE_THRESHOLD=20
   # Show battery in green when it's charging or fully charged.
   typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=2
   # Show battery in yellow when it's discharging.
