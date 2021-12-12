@@ -16,7 +16,9 @@ Set ZSH as default shell
 
 ### ZSH Theme
 
-#### Spaceship theme
+To select which theme to use change `ZSH_THEME` in `shell/.shellconfig/oh-my-zsh`
+
+#### Spaceship
 
 Clone this repo:
 
