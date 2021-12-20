@@ -6,8 +6,6 @@
 alias npmup='npm install npm -g; npm update -g;'
 alias rubyup='sudo gem update --system; sudo gem update; sudo gem cleanup'
 
-alias ncdu='ncdu --color dark --follow-firmlinks'
-
 alias ydl='youtube-dl'
 alias ydl-a='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
 alias youtube-dl-audio='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
@@ -19,3 +17,9 @@ alias aaa='fuck' # also use esc twice with the thefuck ohmyzsh plugin
 alias nom='npm' # Because I always type it wrong
 
 alias jupyter-lab='jupyter lab --no-browser --ip "*"'
+
+if [ "$PLATFORM"  = 'mac' ]; then
+    alias ncdu='ncdu --color dark --follow-firmlinks'
+else
+    alias ncdu='ncdu --color dark'
+fi
