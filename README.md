@@ -174,6 +174,26 @@ source /usr/share/doc/fzf/examples/completion.zsh
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 ```
 
+### Direnv
+
+#### OSX
+
+```bash
+brew install direnv
+```
+
+##### Uninstall
+
+```bash
+brew uninstall direnv
+```
+
+#### Debian
+
+```bash
+sudo apt-get install direnv
+```
+
 ### Stow
 
 Install [GNU stow](http://www.gnu.org/software/stow/).
