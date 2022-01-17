@@ -7,6 +7,7 @@ export LC_CTYPE="en_US.UTF-8"
 
 export PATH=~/.cargo/bin:$PATH
 export PATH=~/.local/bin:$PATH
+export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
 
 if [ "$PLATFORM"  = 'mac' ]; then
     # added by Anaconda3 installer
