@@ -18,8 +18,4 @@ alias nom='npm' # Because I always type it wrong
 
 alias jupyter-lab='jupyter lab --no-browser --ip "*"'
 
-if [ "$PLATFORM"  = 'mac' ]; then
-    alias ncdu='ncdu --color dark --follow-firmlinks'
-else
-    alias ncdu='ncdu --color dark'
-fi
+alias ncdu='ncdu --color dark'
