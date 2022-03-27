@@ -186,3 +186,13 @@ if [ "$PLATFORM"  = 'mac' ]; then
         return 0;
     }
 fi
+
+condanew() {
+    if [ -n "$1" ]; then
+        conda create -n $(basename "$PWD") python=$1 --no-default-packages -y
+    else
+        conda create -n $(basename "$PWD") python --no-default-packages -y
+    fi;
+
+    source activate $(basename "$PWD")
+}

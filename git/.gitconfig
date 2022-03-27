@@ -8,3 +8,5 @@
 	email = lucaangioloni@gmail.com
 [pull]
 	rebase = false
+[core]
+	excludesFile = ~/.config/git/global_gitignore

@@ -1,0 +1,18 @@
+layout_anaconda() {
+  source $HOME/.shellconfig/env
+  condanew() {
+    if [ -n "$1" ]; then
+      conda create -n $(basename "$PWD") python=$1 --no-default-packages -y
+    else
+      conda create -n $(basename "$PWD") python --no-default-packages -y
+    fi;
+
+    source activate $(basename "$PWD")
+  }
+
+  if [ -n "$1" ]; then
+    source activate $(basename "$PWD") || condanew $1
+  else
+    source activate $(basename "$PWD") || condanew
+  fi;
+}

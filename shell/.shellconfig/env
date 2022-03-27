@@ -11,12 +11,12 @@ export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
 
 if [ "$PLATFORM"  = 'mac' ]; then
     # added by Anaconda3 installer
-    export PATH="/Users/lucaangioloni/anaconda3/bin:$PATH"
-    alias pip3="/Users/lucaangioloni/anaconda3/bin/pip"
-    alias python3="/Users/lucaangioloni/anaconda3/bin/python"
+    export PATH="$HOME/anaconda3/bin:$PATH"
+    alias pip3="$HOME/anaconda3/bin/pip"
+    alias python3="$HOME/anaconda3/bin/python"
 
     # Removes the (env-name) when activating an environment. It is redundant since the spaceship theme does this already (better). If the theme is changed re-activate this
-    # conda config --set changeps1 False
+    conda config --set changeps1 False
 
     export PATH=$HOME/bin:/usr/local/bin:$PATH
     export PATH="/usr/local/sbin:$PATH"
