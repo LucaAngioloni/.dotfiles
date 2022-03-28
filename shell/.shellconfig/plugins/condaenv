@@ -1,0 +1,73 @@
+condanew() {
+    if [ -z $1 ]; then
+        echo "env name needed!"
+        echo ""
+        echo "Usage: condanew envname [python_version]"
+        return;
+    fi
+
+    if [ -n "$2" ]; then
+        conda create -n $1 python=$2 --no-default-packages -y
+    else
+        conda create -n $1 python --no-default-packages -y
+    fi;
+
+    source activate $1
+}
+
+condaenv(){
+    if [ -n "$ZSH_VERSION" ]; then
+        emulate -L ksh;
+    fi
+
+    help()
+    {
+        echo "Usage: condaenv [envname [python_version] | [-n envname] [-v python_version]]"
+        echo ""
+        echo "       Default envname is the current folder name, while the default python_version is the latest available."
+        exit 2
+    }
+
+    local SHORT=n:,v:,h
+    local ENVNAME
+    local VERSION
+
+    local OPTIND=1
+
+    script_args=()
+    while [ $OPTIND -le "$#" ]
+    do
+        if getopts $SHORT option
+        then
+            case $option in
+                n) ENVNAME=$OPTARG;;
+                v) VERSION=$OPTARG;;
+                h) help;;
+            esac
+        else
+            if [ -n "$ZSH_VERSION" ]; then
+                script_args+=("${@[OPTIND-1]}");
+            else
+                script_args+=("${!OPTIND}")
+            fi
+            ((OPTIND++))
+        fi
+    done
+
+    local i=0
+    if [ -z $ENVNAME ]; then
+        ENVNAME=${script_args[$i]}
+        ((i++))
+    fi
+
+    if [ -z $VERSION ]; then
+        VERSION=${script_args[$i]}
+        ((i++))
+    fi
+
+    if [ -z $ENVNAME ]; then
+        ENVNAME=$(basename "$PWD")
+    fi
+
+    source activate $ENVNAME || condanew $ENVNAME $VERSION
+}
