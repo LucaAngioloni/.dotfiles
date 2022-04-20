@@ -19,3 +19,5 @@ alias nom='npm' # Because I always type it wrong
 alias jupyter-lab='jupyter lab --no-browser --ip "*"'
 
 alias ncdu='ncdu --color dark'
+
+alias dsrm='find . -name ".DS_Store" -type f -delete'
