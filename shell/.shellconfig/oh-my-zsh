@@ -93,11 +93,12 @@ plugins=(
 # Fix slow paste
 DISABLE_MAGIC_FUNCTIONS=true
 
-# zsh-completions
-autoload -U compinit && compinit
-
 #Start oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# No need to load them because `$ZSH/oh-my-zsh.sh` already loads it.
+# zsh-completions
+# autoload -U compinit && compinit
 
 # This is needed with the tmux plugin active, otherwise writing `tmux` alone will do `tmux a` and not create a new window.
 # ZSH_TMUX_AUTOCONNECT=false
