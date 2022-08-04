@@ -224,6 +224,23 @@ Use git to push and pull.
 
 If the changes are on the existing files they should be applied immediately, otherwise if you add new "folders" or files, redo the Stow process.
 
+## iTerm 2
+
+On Mac use iTerm2. Themes and configurations are in the `term` folder.
+
+To make startup faster set in the *General* tab of *Profile* in *Command*:
+
+**Command**: `login -fq lucaangioloni /usr/local/bin/zsh -il`
+
+This serves 2 purposes:
+
+- Start zsh in **interactive** and **login** mode with `-il`.
+- Do not show last login information with `-q` (same effect as `.hushlogin` but it seems faster because it does not even go to search the logs to fine the last login event. (? check this info)).
+
+Installing **git** with brew instead of using the **Apple git** seems to spped things a little.
+
+Also accepting the terms of the xcodebuild licence seems to help: `sudo xcodebuild -license accept`.
+
 ## Optional tools
 
 ### Show images in terminal

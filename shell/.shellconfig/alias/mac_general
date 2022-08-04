@@ -6,7 +6,4 @@ if [ "$PLATFORM"  = 'mac' ]; then
     alias show='qlmanage -p'
 
     alias brewup='brew update; brew upgrade; brew upgrade --cask --greedy; brew cleanup --prune-prefix; brew cleanup; brew doctor'
-
-    # only for Espressif
-    alias idf.py='/Users/lucaangioloni/.espressif/python_env/idf4.3_py3.8_env/bin/python /Users/lucaangioloni/esp/esp-idf/tools/idf.py'
 fi
