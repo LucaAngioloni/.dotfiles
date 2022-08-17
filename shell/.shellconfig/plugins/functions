@@ -78,7 +78,8 @@ rezsh(){
 }
 
 fcount(){
-    find $1 -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r
+    local folder="${1:-.}"
+    find $folder -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r
 }
 
 dirsize () {
