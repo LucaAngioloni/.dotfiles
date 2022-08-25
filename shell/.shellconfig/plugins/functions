@@ -1,3 +1,5 @@
+beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
+
 server(){
     local usage="Usage: server [auth <user> <pssw> | php [local(host)|ip] | python [upload] | refresh]"
     if [[ $# == 0 ]]; then
@@ -167,6 +169,81 @@ gifify() {
 # brew reinstall ffmpeg --with-libvpx
 webmify(){
     ffmpeg -i "$1" -vcodec libvpx -acodec libvorbis -isync -copyts -aq 80 -threads 3 -qmax 30 -y "$2" "$1.webm"
+}
+
+pdf_shrink(){
+    local input
+    local output=output.pdf
+    local quality=1
+
+    help()
+    {
+        echo "Usage: pdf_shrink <input_file.pdf> [<output_file.pdf] [-q=<quality>]"
+        echo ""
+        echo "       The quality can be a number between 1 and 5, from lower to higher quality and size."
+        echo "       Corresponds to ghostscript setting -dPDFSETTINGS:/"
+        echo "           1: screen, 2: ebook, 3: prepress, 4: printer, 5: default."
+    }
+
+    get_quality(){
+        if [ $1 -le 0 ]; then
+            echo "/screen"
+            return
+        fi
+
+        if [ $1 -ge 6 ]; then
+            echo "/screen"
+            return
+        fi
+
+        if [ $1 -eq 1 ]; then
+            echo "/screen"
+        elif [ $1 -eq 2 ]; then
+            echo "/ebook"
+        elif [ $1 -eq 3 ]; then
+            echo "/prepress"
+        elif [ $1 -eq 4 ]; then
+            echo "/printer"
+        else
+            echo "/default"
+        fi
+    }
+
+    if [ $# -eq 0 ]; then
+        # No params
+        help
+        return 2
+    fi
+
+    if [ $# -ge 4 ]; then
+        # Too many params
+        help
+        return 2
+    fi
+
+    if [ $# -eq 1 ]; then
+        input=$1
+    fi
+
+    if [ $# -eq 2 ]; then
+        input=$1
+        if beginswith "-q=" "$2"; then
+            quality=${2#*=}
+        else
+            output=$2
+        fi
+    fi
+
+    if [ $# -eq 3 ]; then
+        input=$1
+        output=$2
+        quality=${3#*=}
+    fi
+
+    quality=$( get_quality "$quality" )
+
+    # echo "input=" $input " output=" $output " quality=" $quality
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=$quality -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$output $input
 }
 
 if [ "$PLATFORM"  = 'mac' ]; then
