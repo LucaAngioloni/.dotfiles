@@ -1,5 +1,7 @@
 beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
 
+mkcd() { mkdir -p $1; cd $1 }
+
 server(){
     local usage="Usage: server [auth <user> <pssw> | php [local(host)|ip] | python [upload] | refresh]"
     if [[ $# == 0 ]]; then
@@ -54,9 +56,9 @@ mdread(){
 }
 
 # create .tar.gz
-targz() { tar -zcvf $1.tar.gz $1; rm -r $1; }
+targz() { tar -zcvf $1.tar.gz $1; }
 # extract .tar.gz
-untargz() { tar -zxvf $1; rm -r $1; }
+untargz() { tar -zxvf $1; }
 
 # Determine size of a file or total size of a directory
 function fs() {
@@ -76,12 +78,62 @@ function fs() {
 rezsh(){
     cd ~;
     source .zshrc;
-    cd -;
+    cd - > /dev/null;
 }
 
 fcount(){
+    help(){
+        echo "Usage: fcount [<path> [-t=<type>] | -t=<type> | -h]"
+    }
+
+    local folder="."
+    local type=""
+    if [ $# -ge 3 ]; then
+        help
+        return -1
+    fi
+
+    if [ $# -eq 1 ]; then
+        if [[ $1 == "-h" ]]; then
+            help
+            return 1;
+        elif beginswith "-t=" "$1"; then
+            type=${1#*=}
+        else
+            folder="$1"
+        fi
+    elif [ $# -eq 2 ]; then
+        if beginswith "-t=" "$1"; then
+            type=${1#*=}
+            folder="$2"
+        else
+            folder="$1"
+            if beginswith "-t=" "$2"; then
+                type=${2#*=}
+            else
+                help
+                return -2
+            fi
+        fi
+    fi
+
+    if [ -z "$type" ]; then
+        find $folder -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r
+    else
+        find $folder -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r | grep $type
+    fi
+}
+
+abspath(){
+    cd $1;
+    echo $(pwd);
+    cd - > /dev/null;
+}
+
+fnum(){
     local folder="${1:-.}"
-    find $folder -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r
+    N="$(ll $folder | wc -l)";
+    echo "$N files in $(abspath $folder)";
 }
 
 dirsize () {
