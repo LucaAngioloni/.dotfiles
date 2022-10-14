@@ -1,5 +1,6 @@
 # private ssh aliases
 shell/.shellconfig/alias/ssh
+shell/.shellconfig/plugins/bw
 
 .DS_Store
 

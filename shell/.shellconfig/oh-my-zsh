@@ -69,6 +69,7 @@ plugins=(
   zsh-completions
   zsh-autosuggestions
   zsh-syntax-highlighting
+  git-auto-fetch
   colorize # ccat and cless: print with sintax highlighting
   colored-man-pages
   cp # adds the cpv command (rsync below) to copy files with progress bar and all other features of rsync
