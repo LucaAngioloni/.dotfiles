@@ -15,59 +15,126 @@ condanew() {
     source activate $1
 }
 
+# condaenv(){
+#     if [ -n "$ZSH_VERSION" ]; then
+#         emulate -L ksh;
+#     fi
+
+#     help()
+#     {
+#         echo "Usage: condaenv [envname [python_version] | [-n envname] [-v python_version]]"
+#         echo ""
+#         echo "       Default envname is the current folder name, while the default python_version is the latest available."
+#         exit 2
+#     }
+
+#     local SHORT=n:,v:,h
+#     local ENVNAME
+#     local VERSION
+
+#     local OPTIND=1
+
+#     script_args=()
+#     while [ $OPTIND -le "$#" ]
+#     do
+#         if getopts $SHORT option
+#         then
+#             case $option in
+#                 n) ENVNAME=$OPTARG;;
+#                 v) VERSION=$OPTARG;;
+#                 h) help;;
+#             esac
+#         else
+#             if [ -n "$ZSH_VERSION" ]; then
+#                 script_args+=("${@[OPTIND-1]}");
+#             else
+#                 script_args+=("${!OPTIND}")
+#             fi
+#             ((OPTIND++))
+#         fi
+#     done
+
+#     local i=0
+#     if [ -z $ENVNAME ]; then
+#         ENVNAME=${script_args[$i]}
+#         ((i++))
+#     fi
+
+#     if [ -z $VERSION ]; then
+#         VERSION=${script_args[$i]}
+#         ((i++))
+#     fi
+
+#     if [ -z $ENVNAME ]; then
+#         ENVNAME=$(basename "$PWD")
+#     fi
+
+#     # echo "condaenv -> " $ENVNAME $VERSION
+
+#     source activate $ENVNAME || condanew $ENVNAME $VERSION
+# }
+
 condaenv(){
-    if [ -n "$ZSH_VERSION" ]; then
-        emulate -L ksh;
+    ARG_RES="$(
+    python -c """
+import argparse
+import sys
+import os
+
+out_parser = argparse.ArgumentParser(description='Create new Conda environment')
+out_parser.add_argument('pos_args', nargs='*', default=None, type=str)
+out_parser.add_argument('-n', '--name', default=None, type=str)
+out_parser.add_argument('-v', '--version', default=None, type=str)
+
+parser = argparse.ArgumentParser(description='Create new Conda environment')
+parser.add_argument('pos_args', nargs='*', default=None, type=str)
+parser.add_argument('-n', '--name', default=None, type=str)
+parser.add_argument('-v', '--version', default=None, type=str)
+
+args = out_parser.parse_args()
+out_args = args.pos_args + (['-n', args.name] if args.name is not None else []) + (['-v', args.version] if args.version is not None else [])
+args = parser.parse_args(out_args)
+
+if len(args.pos_args) > 2:
+    print('Too many arguments')
+    sys.exit(-1)
+elif len(args.pos_args) == 2:
+    name = args.pos_args[0]
+    version = args.pos_args[1]
+elif len(args.pos_args) == 1:
+    name = args.pos_args[0]
+    version = ''
+else:
+    name = ''
+    version = ''
+
+name = name if args.name is None else args.name
+version = version if args.version is None else args.version
+
+if version:
+    try:
+        [int(p) for p in version.split('.')]
+    except:
+        print(f'Invalid Python version: {version}')
+        sys.exit(-2)
+
+if name == '':
+    name = os.path.basename(os.getcwd()).replace(' ', '_')
+
+print(f'{name} {version}')
+sys.exit(0)
+    """ -- $@)"
+
+    # If previous command was unsuccessful
+    if [ $? -ne 0 ];
+    then
+        echo "Error: ${ARG_RES}"; return;
     fi
 
-    help()
-    {
-        echo "Usage: condaenv [envname [python_version] | [-n envname] [-v python_version]]"
-        echo ""
-        echo "       Default envname is the current folder name, while the default python_version is the latest available."
-        exit 2
-    }
+    ENVNAME=${ARG_RES% *}
+    VERSION=${ARG_RES#* }
 
-    local SHORT=n:,v:,h
-    local ENVNAME
-    local VERSION
-
-    local OPTIND=1
-
-    script_args=()
-    while [ $OPTIND -le "$#" ]
-    do
-        if getopts $SHORT option
-        then
-            case $option in
-                n) ENVNAME=$OPTARG;;
-                v) VERSION=$OPTARG;;
-                h) help;;
-            esac
-        else
-            if [ -n "$ZSH_VERSION" ]; then
-                script_args+=("${@[OPTIND-1]}");
-            else
-                script_args+=("${!OPTIND}")
-            fi
-            ((OPTIND++))
-        fi
-    done
-
-    local i=0
-    if [ -z $ENVNAME ]; then
-        ENVNAME=${script_args[$i]}
-        ((i++))
-    fi
-
-    if [ -z $VERSION ]; then
-        VERSION=${script_args[$i]}
-        ((i++))
-    fi
-
-    if [ -z $ENVNAME ]; then
-        ENVNAME=$(basename "$PWD")
-    fi
+    echo "condaenv -> " $ENVNAME $VERSION
 
     source activate $ENVNAME || condanew $ENVNAME $VERSION
 }
