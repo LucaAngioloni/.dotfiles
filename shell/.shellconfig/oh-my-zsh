@@ -77,7 +77,7 @@ plugins=(
   z
   # dirhistory # move through dirs with alt + arrow (alt + up goes to parent directory, alt + left moves back to the las dir and so on...)
   encode64 # encode64 (e64) and decode64 (d64)
-  pip # tab complete on pip install and a few aliases
+  # pip # tab complete on pip install and a few aliases
   docker # autocompletion for docker
   docker-compose # autocompletion for docker and a few aliases
   history # aliases: h -> history,  hs -> history | grep, hsi -> history | grep -i
