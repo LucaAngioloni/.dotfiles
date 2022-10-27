@@ -80,6 +80,8 @@ brew install thefuck
 
 #### Debian
 
+Requires Python.
+
 ```bash
 pip3 install thefuck --user
 ```
@@ -235,9 +237,9 @@ To make startup faster set in the *General* tab of *Profile* in *Command*:
 This serves 2 purposes:
 
 - Start zsh in **interactive** and **login** mode with `-il`.
-- Do not show last login information with `-q` (same effect as `.hushlogin` but it seems faster because it does not even go to search the logs to fine the last login event. (? check this info)).
+- Do not show last login information with `-q` (same effect as `.hushlogin` but it seems faster because it does not even go to search the logs to find the last login event. (? check this info)).
 
-Installing **git** with brew instead of using the **Apple git** seems to spped things a little.
+Installing **git** with brew instead of using the **Apple git** seems to speed things a little.
 
 Also accepting the terms of the xcodebuild licence seems to help: `sudo xcodebuild -license accept`.
 
