@@ -92,7 +92,7 @@ parser.add_argument('-n', '--name', default=None, type=str)
 parser.add_argument('-v', '--version', default=None, type=str)
 
 args = out_parser.parse_args()
-out_args = args.pos_args + (['-n', args.name] if args.name is not None else []) + (['-v', args.version] if args.version is not None else [])
+out_args = (args.pos_args if args.pos_args[0] != '--' else args.pos_args[1:]) + (['-n', args.name] if args.name is not None else []) + (['-v', args.version] if args.version is not None else [])
 args = parser.parse_args(out_args)
 
 if len(args.pos_args) > 2:

@@ -6,8 +6,9 @@
 export PATH="$(
     python -c """
 import sys
-my_paths = sys.argv[1].split(':')
-paths = sys.argv[2].split(':')
+i = 2 if sys.argv[1] == '--' else 1
+my_paths = list(dict.fromkeys(sys.argv[i].split(':')))
+paths = sys.argv[i+1].split(':')
 my_paths.extend([p for p in paths if p not in my_paths])
 print(':'.join(my_paths))
 sys.exit(0)

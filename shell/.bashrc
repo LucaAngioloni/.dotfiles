@@ -26,6 +26,14 @@ esac
 # These need to be sourced in order
 source ~/.shellconfig/env
 
+if [ "$PLATFORM"  = 'mac' ]; then
+    # This is needed because MacOS automatically sources /etc/zprofile
+    # where the command /usr/libexec/path_helper is called.
+    # This overrides the PATH set in zshenv and changes the order of the paths.
+    # This script fixes that resorting the paths like intended.
+    source ~/.shellconfig/fix-path-mac
+fi
+
 git_branch () {
     if git rev-parse --git-dir >/dev/null 2>&1
         then echo -e "" [$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')]
