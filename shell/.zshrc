@@ -1,4 +1,13 @@
 # These need to be sourced in order
+
+if [ "$PLATFORM"  = 'mac' ]; then
+    # This is needed because MacOS automatically sources /etc/zprofile
+    # where the command /usr/libexec/path_helper is called.
+    # This overrides the PATH set in zshenv and changes the order of the paths.
+    # This script fixes that resorting the paths like intended.
+    source ~/.shellconfig/fix-path-mac
+fi
+
 source ~/.shellconfig/oh-my-zsh
 
 # Source aliases

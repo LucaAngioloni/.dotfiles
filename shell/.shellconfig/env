@@ -7,7 +7,6 @@ export LC_CTYPE="en_US.UTF-8"
 
 export PATH=~/.cargo/bin:$PATH
 export PATH=~/.local/bin:$PATH
-export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
 
 if [ "$PLATFORM"  = 'mac' ]; then
     # added by Anaconda3 installer
@@ -21,16 +20,20 @@ if [ "$PLATFORM"  = 'mac' ]; then
     export PATH=$HOME/bin:/usr/local/bin:$PATH
     export PATH="/usr/local/sbin:$PATH"
 
+    #Google Cloud
+    export CLOUDSDK_PYTHON="/usr/local/opt/python@3/libexec/bin/python"
+    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
     #Ruby
     export PATH="/usr/local/opt/ruby/bin:$PATH"
     export LDFLAGS="-L/usr/local/opt/ruby/lib"
     export CPPFLAGS="-I/usr/local/opt/ruby/include"
     export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 
-    #Google Cloud
-    export CLOUDSDK_PYTHON="/usr/local/opt/python@3/libexec/bin/python"
-    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-
     export EDITOR='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+elif [ "$PLATFORM"  = 'linux' ]; then
+    export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
 fi
+
+export MY_PATH=$PATH

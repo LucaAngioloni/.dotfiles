@@ -80,7 +80,7 @@ plugins=(
   # pip # tab complete on pip install and a few aliases
   docker # autocompletion for docker
   docker-compose # autocompletion for docker and a few aliases
-  history # aliases: h -> history,  hs -> history | grep, hsi -> history | grep -i
+  # history # aliases: h -> history,  hs -> history | grep, hsi -> history | grep -i
   thefuck # press esc twice to activate thefuck
   transfer # use transfer + file/dir to upload to transfer.sh
   # zsh-interactive-cd # to use fzf when double tab on cd instead of the default
