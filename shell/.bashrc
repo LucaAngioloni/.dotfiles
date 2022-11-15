@@ -105,10 +105,10 @@ function solarizedcolors {
 
 # Source aliases
 for alias_file in ~/.shellconfig/alias/*; do
-source $alias_file
+source "$alias_file"
 done
 
 # Source plugins
 for plugin_file in ~/.shellconfig/plugins/*; do
-source $plugin_file
+source "$plugin_file"
 done

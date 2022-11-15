@@ -1,3 +1,5 @@
+# shellcheck disable=SC2148
+
 if [ "$PLATFORM"  = 'mac' ]; then
     alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
     alias vscode='/Applications/Visual\ Studio\ Code.app/contents/Resources/app/bin/code'

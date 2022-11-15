@@ -1,3 +1,5 @@
+# shellcheck disable=SC2148
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -10,7 +12,7 @@ alias ydl='youtube-dl'
 alias ydl-a='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
 alias youtube-dl-audio='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
 
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
 
 alias aaa='fuck' # also use esc twice with the thefuck ohmyzsh plugin
 

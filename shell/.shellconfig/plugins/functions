@@ -1,6 +1,8 @@
+# shellcheck disable=SC2148
+
 beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
 
-mkcd() { mkdir -p $1; cd $1 }
+mkcd() { mkdir -p "$1"; cd "$1" || return 1; }
 
 server(){
     local usage="Usage: server [auth <user> <pssw> | php [local(host)|ip] | python [upload] | refresh]"
@@ -17,9 +19,10 @@ server(){
                     elif [[ $2 == "localhost" ]]; then
                         php -S localhost:8000
                     elif [[ $2 == "ip" ]]; then
+                        # shellcheck disable=SC2046
                         php -S $(ipconfig getifaddr en0):8000 # automatically gets IP but only if connected to network
                     else
-                        echo $usage
+                        echo "$usage"
                     fi
                 fi
             elif [[ $1 == "python" ]]; then
@@ -34,14 +37,15 @@ server(){
                 fi
             elif [[ $1 == "auth" ]]; then
                 if [[ $# == 1 ]]; then
-                    echo $usage
+                    echo "$usage"
                 else
-                    http-server-with-auth ./ --username $2 --password $3
+                    http-server-with-auth ./ --username "$2" --password "$3"
                 fi
             elif [[ $1 == "refresh" ]]; then
+                # shellcheck disable=SC2046
                 browser-sync start -s -f . --no-notify --host $(ipconfig getifaddr en0) --port 9000
             else
-                echo $usage
+                echo "$usage"
             fi
         else
             python3 -m http.server
@@ -56,9 +60,9 @@ mdread(){
 }
 
 # create .tar.gz
-targz() { tar -zcvf $1.tar.gz $1; }
+targz() { tar -zcvf "$1.tar.gz" "$1"; }
 # extract .tar.gz
-untargz() { tar -zxvf $1; }
+untargz() { tar -zxvf "$1"; }
 
 # Determine size of a file or total size of a directory
 function fs() {
@@ -67,6 +71,7 @@ function fs() {
 	else
 		local arg=-sh;
 	fi
+    # shellcheck disable=SC2199
 	if [[ -n "$@" ]]; then
 		du $arg -- "$@";
 	else
@@ -91,7 +96,7 @@ fcount(){
     local type=""
     if [ $# -ge 3 ]; then
         help
-        return -1
+        return 1
     fi
 
     if [ $# -eq 1 ]; then
@@ -113,21 +118,21 @@ fcount(){
                 type=${2#*=}
             else
                 help
-                return -2
+                return 2
             fi
         fi
     fi
 
     if [ -z "$type" ]; then
-        find $folder -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r
+        find "$folder" -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r
     else
-        find $folder -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r | grep $type
+        find "$folder" -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r | grep "$type"
     fi
 }
 
 abspath(){
-    cd $1;
-    echo $(pwd);
+    cd "$1" || return 1;
+    pwd;
     cd - > /dev/null;
 }
 
@@ -138,16 +143,16 @@ fnum(){
 }
 
 dirsize () {
-    du -shx * .[a-zA-Z0-9_]* 2> /dev/null | \
-    egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
-    egrep '^ *[0-9.]*M' /tmp/list
-    egrep '^ *[0-9.]*G' /tmp/list
+    du -shx ./* .[a-zA-Z0-9_]* 2> /dev/null | \
+    grep -E '^ *[0-9.]*[MG]' | sort -n > /tmp/list
+    grep -E '^ *[0-9.]*M' /tmp/list
+    grep -E '^ *[0-9.]*G' /tmp/list
     rm -rf /tmp/list
 }
 
 # Cat json files in a pretty way
 jsoncat(){
-    cat $1 | python -m json.tool
+    python -m json.tool < "$1"
 }
 
 # preview csv files. source: http://stackoverflow.com/questions/1875305/command-line-csv-viewer
@@ -171,32 +176,33 @@ function f() {
 
 # Copy w/ progress
 cp_p () {
-  rsync -WavP --human-readable --progress $1 $2
+  rsync -WavP --human-readable --progress "$1" "$2"
 }
 
 # Generate random password
 psw () {
+    # shellcheck disable=SC2089
     local usage="Usage: psw [<num_chars> ['alphanumeric' | '-a'] | 'alphanumeric' | '-a']\n\nExamples:\n  $ psw\n  $ psw 8\n  $ psw 14 -a\n  $ psw -a"
     if [[ $# == 0 ]]; then
         LC_ALL=C tr -dc 'A-Za-z0-9!#@\-+*_$%&' </dev/urandom | head -c 15 ; echo ''
     else
         if [[ $# == 1 ]]; then
             if [[ $1 == "help" ]]; then
-                echo $usage
+                echo "$usage"
             elif [[ $1 == "alphanumeric" ]]; then
                 LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 15 ; echo ''
             elif [[ $1 == "-a" ]]; then
                 LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 15 ; echo ''
             else
-                LC_ALL=C tr -dc 'A-Za-z0-9!#@\-+*_$%&' </dev/urandom | head -c $1 ; echo ''
+                LC_ALL=C tr -dc 'A-Za-z0-9!#@\-+*_$%&' </dev/urandom | head -c "$1" ; echo ''
             fi
         else
             if [[ $2 == "alphanumeric" ]]; then
-                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c $1 ; echo ''
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c "$1" ; echo ''
             elif [[ $2 == "-a" ]]; then
-                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c $1 ; echo ''
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c "$1" ; echo ''
             else
-                LC_ALL=C tr -dc 'A-Za-z0-9!#@\-+*_$%&' </dev/urandom | head -c $1 ; echo ''
+                LC_ALL=C tr -dc 'A-Za-z0-9!#@\-+*_$%&' </dev/urandom | head -c "$1" ; echo ''
             fi
         fi
     fi
@@ -239,23 +245,23 @@ pdf_shrink(){
     }
 
     get_quality(){
-        if [ $1 -le 0 ]; then
+        if [ "$1" -le 0 ]; then
             echo "/screen"
             return
         fi
 
-        if [ $1 -ge 6 ]; then
+        if [ "$1" -ge 6 ]; then
             echo "/screen"
             return
         fi
 
-        if [ $1 -eq 1 ]; then
+        if [ "$1" -eq 1 ]; then
             echo "/screen"
-        elif [ $1 -eq 2 ]; then
+        elif [ "$1" -eq 2 ]; then
             echo "/ebook"
-        elif [ $1 -eq 3 ]; then
+        elif [ "$1" -eq 3 ]; then
             echo "/prepress"
-        elif [ $1 -eq 4 ]; then
+        elif [ "$1" -eq 4 ]; then
             echo "/printer"
         else
             echo "/default"
@@ -296,7 +302,7 @@ pdf_shrink(){
     quality=$( get_quality "$quality" )
 
     # echo "input=" $input " output=" $output " quality=" $quality
-    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=$quality -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$output $input
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="$quality" -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output" "$input"
 }
 
 if [ "$PLATFORM"  = 'mac' ]; then

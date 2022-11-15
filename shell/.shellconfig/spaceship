@@ -1,3 +1,5 @@
+# shellcheck disable=SC2148
+
 #Spaceship theme parameters
 #-----------------------------------------
 SPACESHIP_PROMPT_ADD_NEWLINE="true"
