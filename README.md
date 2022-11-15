@@ -16,7 +16,10 @@ Set ZSH as default shell
 
 ### ZSH Theme
 
-To select which theme to use change `ZSH_THEME` in `shell/.shellconfig/oh-my-zsh`
+To select which theme to use change `ZSH_THEME` in `shell/.shellconfig/oh-my-zsh`.
+You can just install the one you need.
+
+My current favourite is: **Powelevel10k**
 
 #### Spaceship
 
@@ -38,6 +41,19 @@ Clone this repo:
 
 ```bash
 git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+```
+
+#### Starship
+
+Install Starship:
+
+```bash
+# MacOS
+brew install starship
+
+# Debian
+curl -sS https://starship.rs/install.sh | sh
+# Run this command again to update
 ```
 
 ### ZSH plugins
