@@ -6,13 +6,28 @@
 # This script fixes that resorting the paths like intended.
 
 # shellcheck disable=SC2155
-export PATH="$(
-    python -c """
-import sys
-i = 2 if sys.argv[1] == '--' else 1
-my_paths = list(dict.fromkeys(sys.argv[i].split(':')))
-paths = sys.argv[i+1].split(':')
-my_paths.extend([p for p in paths if p not in my_paths])
-print(':'.join(my_paths))
-sys.exit(0)
-    """ -- $MY_PATH $PATH)"
+if [ "$MY_PATH" != "$PATH" ]; then
+    # echo $PATH
+#     export PATH="$(
+#         python -c """
+# import sys
+# i = 2 if sys.argv[1] == '--' else 1
+# my_paths = list(dict.fromkeys(sys.argv[i].split(':')))
+# paths = sys.argv[i+1].split(':')
+# my_paths.extend([p for p in paths if p not in my_paths])
+# print(':'.join(my_paths))
+# sys.exit(0)
+#         """ -- $MY_PATH $PATH)"
+    MY_PATH_LIST=("${(@s/:/)MY_PATH}")
+    PATH_LIST=("${(@s/:/)PATH}")
+
+    for p in $PATH_LIST; do
+        if ((!$MY_PATH[(Ie)$p])); then
+            MY_PATH_LIST+=($p)
+        fi
+    done;
+
+    export PATH=${(j.:.)MY_PATH_LIST}
+    # echo $MY_PATH
+    # echo $PATH
+fi
