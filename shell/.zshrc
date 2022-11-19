@@ -1,7 +1,8 @@
 # shellcheck disable=SC2148
 
-# These need to be sourced in order
+# zmodload zsh/zprof
 
+# These need to be sourced in order
 if [ "$PLATFORM"  = 'mac' ]; then
     # This is needed because MacOS automatically sources /etc/zprofile
     # where the command /usr/libexec/path_helper is called.
@@ -17,3 +18,5 @@ for alias_file in ~/.shellconfig/alias/**/*; source "$alias_file"
 
 # Source plugins
 for plugin_file in ~/.shellconfig/plugins/**/*; source "$plugin_file"
+
+# zprof
