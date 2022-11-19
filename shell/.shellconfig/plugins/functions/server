@@ -1,0 +1,50 @@
+# shellcheck disable=SC2148
+
+server(){
+    local usage="Usage: server [auth <user> <pssw> | php [local(host)|ip] | python [upload] | refresh]"
+    if [[ $# == 0 ]]; then
+        python3 -m http.server
+    else
+        if [[ $# != 0 ]]; then
+            if [[ $1 == "php" ]]; then
+                if [[ $# == 1 ]]; then
+                    php -S localhost:8000
+                else
+                    if [[ $2 == "local" ]]; then
+                        php -S localhost:8000
+                    elif [[ $2 == "localhost" ]]; then
+                        php -S localhost:8000
+                    elif [[ $2 == "ip" ]]; then
+                        # shellcheck disable=SC2046
+                        php -S $(ipconfig getifaddr en0):8000 # automatically gets IP but only if connected to network
+                    else
+                        echo "$usage"
+                    fi
+                fi
+            elif [[ $1 == "python" ]]; then
+                if [[ $# == 1 ]]; then
+                    python3 -m http.server
+                else
+                    if [[ $2 == "upload" ]]; then
+                        /usr/bin/python ~/.scripts/python_server.py
+                    else
+                        python3 -m http.server
+                    fi
+                fi
+            elif [[ $1 == "auth" ]]; then
+                if [[ $# == 1 ]]; then
+                    echo "$usage"
+                else
+                    http-server-with-auth ./ --username "$2" --password "$3"
+                fi
+            elif [[ $1 == "refresh" ]]; then
+                # shellcheck disable=SC2046
+                browser-sync start -s -f . --no-notify --host $(ipconfig getifaddr en0) --port 9000
+            else
+                echo "$usage"
+            fi
+        else
+            python3 -m http.server
+        fi
+    fi
+}

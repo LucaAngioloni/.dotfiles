@@ -1,0 +1,73 @@
+# shellcheck disable=SC2148
+
+# Determine size of a file or total size of a directory
+fs() {
+	if du -b /dev/null > /dev/null 2>&1; then
+		local arg=-sbh;
+	else
+		local arg=-sh;
+	fi
+    # shellcheck disable=SC2199
+	if [[ -n "$@" ]]; then
+		du $arg -- "$@";
+	else
+		du $arg .[^.]* ./*;
+	fi;
+}
+
+dirsize () {
+    du -shx ./* .[a-zA-Z0-9_]* 2> /dev/null | \
+    grep -E '^ *[0-9.]*[MG]' | sort -n > /tmp/list
+    grep -E '^ *[0-9.]*M' /tmp/list
+    grep -E '^ *[0-9.]*G' /tmp/list
+    rm -rf /tmp/list
+}
+
+fcount(){
+    help(){
+        echo "Usage: fcount [<path> [-t=<type>] | -t=<type> | -h]"
+    }
+
+    local folder="."
+    local type=""
+    if [ $# -ge 3 ]; then
+        help
+        return 1
+    fi
+
+    if [ $# -eq 1 ]; then
+        if [[ $1 == "-h" ]]; then
+            help
+            return 1;
+        elif beginswith "-t=" "$1"; then
+            type=${1#*=}
+        else
+            folder="$1"
+        fi
+    elif [ $# -eq 2 ]; then
+        if beginswith "-t=" "$1"; then
+            type=${1#*=}
+            folder="$2"
+        else
+            folder="$1"
+            if beginswith "-t=" "$2"; then
+                type=${2#*=}
+            else
+                help
+                return 2
+            fi
+        fi
+    fi
+
+    if [ -z "$type" ]; then
+        find "$folder" -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r
+    else
+        find "$folder" -type f 2>/dev/null | grep -o ".[^.]\+$" | sort | uniq -c | sort -r | grep "$type"
+    fi
+}
+
+fnum(){
+    local folder="${1:-.}"
+    N="$(ll $folder | wc -l)";
+    echo "$N files in $(abspath $folder)";
+}

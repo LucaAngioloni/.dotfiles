@@ -1,0 +1,30 @@
+# shellcheck disable=SC2148
+
+# Generate random password
+psw () {
+    # shellcheck disable=SC2089
+    local usage="Usage: psw [<num_chars> ['alphanumeric' | '-a'] | 'alphanumeric' | '-a']\n\nExamples:\n  $ psw\n  $ psw 8\n  $ psw 14 -a\n  $ psw -a"
+    if [[ $# == 0 ]]; then
+        LC_ALL=C tr -dc 'A-Za-z0-9!#@\-+*_$%&' </dev/urandom | head -c 15 ; echo ''
+    else
+        if [[ $# == 1 ]]; then
+            if [[ $1 == "help" ]]; then
+                echo "$usage"
+            elif [[ $1 == "alphanumeric" ]]; then
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 15 ; echo ''
+            elif [[ $1 == "-a" ]]; then
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 15 ; echo ''
+            else
+                LC_ALL=C tr -dc 'A-Za-z0-9!#@\-+*_$%&' </dev/urandom | head -c "$1" ; echo ''
+            fi
+        else
+            if [[ $2 == "alphanumeric" ]]; then
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c "$1" ; echo ''
+            elif [[ $2 == "-a" ]]; then
+                LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c "$1" ; echo ''
+            else
+                LC_ALL=C tr -dc 'A-Za-z0-9!#@\-+*_$%&' </dev/urandom | head -c "$1" ; echo ''
+            fi
+        fi
+    fi
+}

@@ -1,0 +1,9 @@
+# shellcheck disable=SC2148
+
+#update zshrc
+rezsh(){
+    cd ~;
+    source .zshenv;
+    source .zshrc;
+    cd - > /dev/null;
+}
