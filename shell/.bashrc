@@ -112,3 +112,8 @@ done
 for plugin_file in ~/.shellconfig/plugins/*; do
 source "$plugin_file"
 done
+
+# Source functions
+for function_file in ~/.functions/*; do
+source "$function_file"
+done

@@ -1,0 +1,5 @@
+# turn that video into webm.
+# brew reinstall ffmpeg --with-libvpx
+webmify(){
+    ffmpeg -i "$1" -vcodec libvpx -acodec libvorbis -isync -copyts -aq 80 -threads 3 -qmax 30 -y "$2" "$1.webm"
+}

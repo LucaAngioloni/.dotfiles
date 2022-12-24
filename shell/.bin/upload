@@ -1,0 +1,6 @@
+# Upload to tmp site
+upload(){
+    curl --progress-bar -F"file=@$1" https://0x0.st
+}
+
+upload "$1"

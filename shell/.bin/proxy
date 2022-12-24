@@ -1,66 +1,5 @@
-# shellcheck disable=SC2148
-
-mkcd() { mkdir -p "$1"; cd "$1" || return 1; }
-
-# read markdown files as a man page
-mdread(){
-    grep -v "\-\-\-\-\-" "$*" | pandoc -s -f markdown -t man | groff -T utf8 -man | less
-}
-
-abspath(){
-    cd "$1" || return 1;
-    pwd;
-    cd - > /dev/null;
-}
-
-# Cat json files in a pretty way
-jsoncat(){
-    python -m json.tool < "$1"
-}
-
-# preview csv files. source: http://stackoverflow.com/questions/1875305/command-line-csv-viewer
-csvcat(){
-      sed 's/,,/, ,/g;s/,,/, ,/g' "$@" | column -s, -t | less -#2 -N -S
-}
-
-# Upload to tmp site
-upload(){
-    curl --progress-bar -F"file=@$1" https://0x0.st
-}
-
-# Replaced by the ohmyzsh plugin
-# Upload to transfer.sh
-# transfer(){if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;}
-
-# find shorthand
-function f() {
-	find . -name "$1" 2>&1 | grep -v 'Permission denied'
-}
-
-# Copy w/ progress
-cp_p () {
-  rsync -WavP --human-readable --progress "$1" "$2"
-}
-
-if [ "$PLATFORM"  = 'mac' ]; then
-    # Find startup and daemon plist
-    launchctlFind () {
-        LaunchctlPATHS=( \
-            ~/Library/LaunchAgents \
-            /Library/LaunchAgents \
-            /Library/LaunchDaemons \
-            /System/Library/LaunchAgents \
-            /System/Library/LaunchDaemons \
-        )
-
-        for curPATH in "${LaunchctlPATHS[@]}"
-        do
-            grep -R "$curPATH" -e "$1"
-        done
-        return 0;
-    }
-
-    proxy() {
+proxy() {
+    if [ "$PLATFORM"  = 'mac' ]; then
         local PROXY_INTERFACE="Wi-Fi"
         local PROXY_HOST=localhost
         local PROXY_PORT=19999
@@ -119,5 +58,10 @@ if [ "$PLATFORM"  = 'mac' ]; then
             echo
             return 65 # end process with error to indicate incorrect arguments
         fi
-    }
-fi
+    else
+        echo "This function is only available on macOS"
+        return 1;
+    fi
+}
+
+proxy "$@"

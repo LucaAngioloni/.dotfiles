@@ -1,0 +1,6 @@
+# Cat json files in a pretty way
+jsoncat(){
+    python -m json.tool < "$1"
+}
+
+jsoncat "$1"

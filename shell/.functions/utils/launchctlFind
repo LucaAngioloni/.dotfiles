@@ -1,0 +1,21 @@
+# Find startup and daemon plist
+launchctlFind () {
+    if [ "$PLATFORM"  = 'mac' ]; then
+        LaunchctlPATHS=( \
+            ~/Library/LaunchAgents \
+            /Library/LaunchAgents \
+            /Library/LaunchDaemons \
+            /System/Library/LaunchAgents \
+            /System/Library/LaunchDaemons \
+        )
+
+        for curPATH in "${LaunchctlPATHS[@]}"
+        do
+            grep -R "$curPATH" -e "$1"
+        done
+        return 0;
+    else
+        echo "This function is only available on macOS"
+        return 1;
+    fi
+}

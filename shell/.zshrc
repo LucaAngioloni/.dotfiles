@@ -19,4 +19,13 @@ for alias_file in ~/.shellconfig/alias/***/*; source "$alias_file"
 # Source plugins
 for plugin_file in ~/.shellconfig/plugins/***/*; source "$plugin_file"
 
+# Autoload functions
+fpath=(~/.functions $fpath)
+autoload -Uz ~/.functions/*(.:t)
+
+for function_folder in ~/.functions/*(/); do
+    fpath=($function_folder $fpath);
+    autoload -Uz $function_folder/*(.:t);
+done;
+
 # zprof

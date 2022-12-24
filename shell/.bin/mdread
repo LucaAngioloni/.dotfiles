@@ -1,0 +1,6 @@
+# read markdown files as a man page
+mdread(){
+    grep -v "\-\-\-\-\-" "$*" | pandoc -s -f markdown -t man | groff -T utf8 -man | less
+}
+
+mdread "$@"

@@ -1,0 +1,2 @@
+# create .tar.gz
+targz() { tar -zcvf "$1.tar.gz" "$1"; }

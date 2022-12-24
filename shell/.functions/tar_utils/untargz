@@ -1,0 +1,2 @@
+# extract .tar.gz
+untargz() { tar -zxvf "$1"; }

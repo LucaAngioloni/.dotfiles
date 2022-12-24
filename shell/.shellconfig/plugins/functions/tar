@@ -1,6 +1,0 @@
-# shellcheck disable=SC2148
-
-# create .tar.gz
-targz() { tar -zcvf "$1.tar.gz" "$1"; }
-# extract .tar.gz
-untargz() { tar -zxvf "$1"; }

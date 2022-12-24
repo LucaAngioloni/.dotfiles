@@ -1,0 +1,5 @@
+abspath(){
+    cd "$1" || return 1;
+    pwd;
+    cd - > /dev/null;
+}

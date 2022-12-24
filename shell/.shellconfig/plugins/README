@@ -1,0 +1,2 @@
+# Put external plugins here
+# Files in this directory are sourced after the aliases and before the functions

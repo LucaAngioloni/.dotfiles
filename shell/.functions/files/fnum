@@ -1,0 +1,5 @@
+fnum(){
+    local folder="${1:-.}"
+    N="$(ll $folder | wc -l)";
+    echo "$N files in $(abspath $folder)";
+}

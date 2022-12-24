@@ -1,0 +1,12 @@
+ds () {
+    local folder="${1:-.}"
+    local RAND_NAME=$(echo $RANDOM | md5sum | head -c 5; echo;)
+    local TMP_FILE=/tmp/list_ds_${RAND_NAME}
+    du -shx ${folder}/* .[a-zA-Z0-9_]* 2> /dev/null | \
+    grep -E '^ *[0-9.]*[BKMG]' | sort -nr > $TMP_FILE;
+    grep -E '^ *[0-9.]*G' $TMP_FILE;
+    grep -E '^ *[0-9.]*M' $TMP_FILE;
+    grep -E '^ *[0-9.]*K' $TMP_FILE;
+    grep -E '^ *[0-9.]*B' $TMP_FILE;
+    rm -rf $TMP_FILE;
+}
