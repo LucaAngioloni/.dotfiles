@@ -1,33 +1,33 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Simple HTTP Server With Upload.
 
 This module builds on BaseHTTPServer by implementing the standard GET
 and HEAD requests in a fairly straightforward manner.
 
+see: https://gist.github.com/UniIsland/3346170
 """
 
 
 __version__ = "0.1"
 __all__ = ["SimpleHTTPRequestHandler"]
 __author__ = "bones7456"
-__home_page__ = "http://luy.li/"
+__home_page__ = "http://li2z.cn/"
 
 import os
 import posixpath
-import BaseHTTPServer
-import urllib
-import cgi
+import http.server
+import urllib.request
+import urllib.parse
+import urllib.error
+import html
 import shutil
 import mimetypes
 import re
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+from io import BytesIO
 
 
-class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
     """Simple HTTP request handler with GET/HEAD/POST commands.
 
@@ -59,21 +59,22 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def do_POST(self):
         """Serve a POST request."""
         r, info = self.deal_post_data()
-        print r, info, "by: ", self.client_address
-        f = StringIO()
-        f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
-        f.write("<html>\n<title>Upload Result Page</title>\n")
-        f.write("<body>\n<h2>Upload Result Page</h2>\n")
-        f.write("<hr>\n")
+        print((r, info, "by: ", self.client_address))
+        f = BytesIO()
+        f.write(b'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
+        f.write(b"<html>\n<title>Upload Result Page</title>\n")
+        f.write(b"<body>\n<h2>Upload Result Page</h2>\n")
+        f.write(b"<hr>\n")
         if r:
-            f.write("<strong>Success:</strong>")
+            f.write(b"<strong>Success:</strong>")
         else:
-            f.write("<strong>Failed:</strong>")
-        f.write(info)
-        f.write("<br><a href=\"%s\">back</a>" % self.headers['referer'])
-        f.write("<hr><small>Powered By: bones7456, check new version at ")
-        f.write("<a href=\"http://luy.li/?s=SimpleHTTPServerWithUpload\">")
-        f.write("here</a>.</small></body>\n</html>\n")
+            f.write(b"<strong>Failed:</strong>")
+        f.write(info.encode())
+        f.write(("<br><a href=\"%s\">back</a>" %
+                self.headers['referer']).encode())
+        f.write(b"<hr><small>Powerd By: bones7456, check new version at ")
+        f.write(b"<a href=\"http://li2z.cn/?s=SimpleHTTPServerWithUpload\">")
+        f.write(b"here</a>.</small></body>\n</html>\n")
         length = f.tell()
         f.seek(0)
         self.send_response(200)
@@ -85,7 +86,10 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             f.close()
 
     def deal_post_data(self):
-        boundary = self.headers.plisttext.split("=")[1]
+        content_type = self.headers['content-type']
+        if not content_type:
+            return (False, "Content-Type header doesn't contain boundary")
+        boundary = content_type.split("=")[1].encode()
         remainbytes = int(self.headers['content-length'])
         line = self.rfile.readline()
         remainbytes -= len(line)
@@ -93,13 +97,12 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             return (False, "Content NOT begin with boundary")
         line = self.rfile.readline()
         remainbytes -= len(line)
-        fn = re.findall(r'Content-Disposition.*name="file"; filename="(.*)"', line)
+        fn = re.findall(
+            r'Content-Disposition.*name="file"; filename="(.*)"', line.decode())
         if not fn:
             return (False, "Can't find out file name...")
         path = self.translate_path(self.path)
         fn = os.path.join(path, fn[0])
-        while os.path.exists(fn):
-            fn += "_"
         line = self.rfile.readline()
         remainbytes -= len(line)
         line = self.rfile.readline()
@@ -116,7 +119,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             remainbytes -= len(line)
             if boundary in line:
                 preline = preline[0:-1]
-                if preline.endswith('\r'):
+                if preline.endswith(b'\r'):
                     preline = preline[0:-1]
                 out.write(preline)
                 out.close()
@@ -184,16 +187,18 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.send_error(404, "No permission to list directory")
             return None
         list.sort(key=lambda a: a.lower())
-        f = StringIO()
-        displaypath = cgi.escape(urllib.unquote(self.path))
-        f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
-        f.write("<html>\n<title>Directory listing for %s</title>\n" % displaypath)
-        f.write("<body>\n<h2>Directory listing for %s</h2>\n" % displaypath)
-        f.write("<hr>\n")
-        f.write("<form ENCTYPE=\"multipart/form-data\" method=\"post\">")
-        f.write("<input name=\"file\" type=\"file\"/>")
-        f.write("<input type=\"submit\" value=\"upload\"/></form>\n")
-        f.write("<hr>\n<ul>\n")
+        f = BytesIO()
+        displaypath = html.escape(urllib.parse.unquote(self.path))
+        f.write(b'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
+        f.write(("<html>\n<title>Directory listing for %s</title>\n" %
+                displaypath).encode())
+        f.write(("<body>\n<h2>Directory listing for %s</h2>\n" %
+                displaypath).encode())
+        f.write(b"<hr>\n")
+        f.write(b"<form ENCTYPE=\"multipart/form-data\" method=\"post\">")
+        f.write(b"<input name=\"file\" type=\"file\"/>")
+        f.write(b"<input type=\"submit\" value=\"upload\"/></form>\n")
+        f.write(b"<hr>\n<ul>\n")
         for name in list:
             fullname = os.path.join(path, name)
             displayname = linkname = name
@@ -204,9 +209,9 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             if os.path.islink(fullname):
                 displayname = name + "@"
                 # Note: a link to a directory displays with @ and links with /
-            f.write('<li><a href="%s">%s</a>\n'
-                    % (urllib.quote(linkname), cgi.escape(displayname)))
-        f.write("</ul>\n<hr>\n</body>\n</html>\n")
+            f.write(('<li><a href="%s">%s</a>\n'
+                    % (urllib.parse.quote(linkname), html.escape(displayname))).encode())
+        f.write(b"</ul>\n<hr>\n</body>\n</html>\n")
         length = f.tell()
         f.seek(0)
         self.send_response(200)
@@ -224,16 +229,17 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
         """
         # abandon query parameters
-        path = path.split('?',1)[0]
-        path = path.split('#',1)[0]
-        path = posixpath.normpath(urllib.unquote(path))
+        path = path.split('?', 1)[0]
+        path = path.split('#', 1)[0]
+        path = posixpath.normpath(urllib.parse.unquote(path))
         words = path.split('/')
-        words = filter(None, words)
+        words = [_f for _f in words if _f]
         path = os.getcwd()
         for word in words:
             drive, word = os.path.splitdrive(word)
             head, word = os.path.split(word)
-            if word in (os.curdir, os.pardir): continue
+            if word in (os.curdir, os.pardir):
+                continue
             path = os.path.join(path, word)
         return path
 
@@ -278,19 +284,20 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             return self.extensions_map['']
 
     if not mimetypes.inited:
-        mimetypes.init() # try to read system mime.types
+        mimetypes.init()  # try to read system mime.types
     extensions_map = mimetypes.types_map.copy()
     extensions_map.update({
-        '': 'application/octet-stream', # Default
+        '': 'application/octet-stream',  # Default
         '.py': 'text/plain',
         '.c': 'text/plain',
         '.h': 'text/plain',
-        })
+    })
 
 
-def test(HandlerClass = SimpleHTTPRequestHandler,
-         ServerClass = BaseHTTPServer.HTTPServer):
-    BaseHTTPServer.test(HandlerClass, ServerClass)
+def test(HandlerClass=SimpleHTTPRequestHandler,
+         ServerClass=http.server.HTTPServer):
+    http.server.test(HandlerClass, ServerClass)
+
 
 if __name__ == '__main__':
     test()

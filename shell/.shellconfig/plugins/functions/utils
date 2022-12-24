@@ -78,9 +78,9 @@ if [ "$PLATFORM"  = 'mac' ]; then
             # local SOCKS_PROC_CMD="ssh -i $SOCKS_PROC_IDENTITY -t -t -D $PROXY_HOST:$PROXY_PORT $SOCKS_PROC_USER@$SOCKS_PROC_HOST"
             local SOCKS_PROC_CMD="ssh -D $PROXY_PORT -C -N $2"
 
-            echo $SOCKS_PROC_CMD
+            echo "$SOCKS_PROC_CMD"
 
-            nohup $SOCKS_PROC_CMD > "$SOCKS_PROC_LOG" 2>&1 &
+            nohup "$SOCKS_PROC_CMD" > "$SOCKS_PROC_LOG" 2>&1 &
             echo $! > "$SOCKS_PROC_PIDFILE"
 
             sudo networksetup -setsocksfirewallproxy "$PROXY_INTERFACE" $PROXY_HOST $PROXY_PORT

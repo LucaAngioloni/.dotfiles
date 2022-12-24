@@ -74,3 +74,5 @@ pdf_shrink(){
     # echo "input=" $input " output=" $output " quality=" $quality
     gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="$quality" -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output" "$input"
 }
+
+pdf_shrink "$@"
