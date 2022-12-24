@@ -8,4 +8,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     alias show='qlmanage -p'
 
     alias brewup='brew update; brew upgrade; brew upgrade --cask --greedy; brew cleanup --prune-prefix; brew cleanup; brew doctor'
+
+    alias afk="osascript -e 'tell application \"System Events\" to sleep'"
+
+    alias empty-trash="sudo rm -frv /Volumes/*/.Trashes; \
+                   sudo rm -frv ~/.Trash; \
+                   sudo rm -frv /private/var/log/asl/*.asl; \
+                   sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 fi
