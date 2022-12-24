@@ -1,14 +1,20 @@
-.git
-.gitignore
-.stow-local-ignore
+# GNU stow ignore .gitignore files by default, and so we modify the default
+# ignore list, taken from
+# http://www.gnu.org/software/stow/manual/html_node/Types-And-Syntax-Of-Ignore-Lists.html,
+# to exclude the gitignore line
 
-.DS_Store
+# Comments and blank lines are allowed.
 
-install.sh
-term/
+\.git
+\.gitignore
 
-.*.itermcolors
+.+~          # emacs backup files
+\#.*\#       # emacs autosave files
 
-README.*
+^/README.*
+^/LICENSE.*
+^/COPYING
 
-LICENSE
+\.stow-local-ignore
+
+\.DS_Store
