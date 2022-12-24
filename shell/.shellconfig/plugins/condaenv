@@ -134,8 +134,8 @@ sys.exit(0)
         echo "Error: ${ARG_RES}"; return;
     fi
 
-    ENVNAME=${ARG_RES% *}
-    VERSION=${ARG_RES#* }
+    local ENVNAME=${ARG_RES% *}
+    local VERSION=${ARG_RES#* }
 
     echo "condaenv -> " "$ENVNAME" "$VERSION"
 
