@@ -40,11 +40,17 @@ fi
 # sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Automatic update without confirmation prompt
+# zstyle ':omz:update' mode auto
 
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=10
+# Just offer a reminder every few days, if there are updates available:
+zstyle ':omz:update' mode reminder
+
+# Turn off auto-updates entirely
+# zstyle ':omz:update' mode disabled
+
+# This will check for updates every 10 days
+zstyle ':omz:update' frequency 10
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -66,7 +72,7 @@ export UPDATE_ZSH_DAYS=10
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd.mm.yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -100,6 +106,9 @@ plugins=(
   # emoji
   # per-directory-history
 )
+
+# Change per-directory-history to use ^H instead of ^G
+PER_DIRECTORY_HISTORY_TOGGLE="^H"
 
 # Fix slow paste
 DISABLE_MAGIC_FUNCTIONS=true
