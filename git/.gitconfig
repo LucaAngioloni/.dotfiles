@@ -10,3 +10,95 @@
 	rebase = false
 [core]
 	excludesFile = ~/.config/git/global_gitignore
+[init]
+    defaultBranch = main
+[pretty]
+
+    custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
+    #                     │        │            │            │             └─ author name
+    #                     │        │            │            └─ message
+    #                     │        │            └─ date (relative)
+    #                     │        └─ decorations (branch, heads or tags)
+    #                     └─ hash (abbreviated)
+[alias]
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	# remove all untracked files and directories
+
+	rh = reset --hard HEAD
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	# remove all untracked files and directories
+
+	back = reset --hard HEAD~1
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	# soft reset to the previous commit
+
+	undo = reset --soft HEAD^
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Show custom log of the commit history in graph mode.
+
+	lg = log --graph --pretty=custom
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Show custom log of the commit history.
+
+    l = log --pretty=custom
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # List contributors.
+
+    lc = shortlog --email --numbered --summary
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Remove last commits (by default it removes the last commit).
+
+    rlc = "!f() { \
+        number_of_commits=\"${1:-1}\"; \
+        git reset --hard \"HEAD~$number_of_commits\"; \
+    }; f"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	# Search commits by source code.
+
+    sc = "!f() { \
+        git log --date=short --decorate --pretty=custom -S\"$1\"; \
+    }; f"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Seach commits by commit message.
+
+    sm = "!f() { \
+        git log --date=short --decorate --pretty=custom --grep=\"$1\"; \
+    }; f"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	# Update the content of the last commit by including all
+    # staged changes.
+    #
+    # Note: "Update" is used loosely. Git doesn't actually
+    # update the last commit, but instead, creates a new commit
+    # based on the last commit and replaces it.
+
+    amend = commit --amend --no-edit
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	# Update the content of the last commit by including all
+    # staged changes as well as allow the user to change its
+    # commit message.
+
+    amendm = commit --amend
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
