@@ -30,6 +30,7 @@ if [ "$PLATFORM"  = 'mac' ]; then
 
     #Ruby
     export PATH="/usr/local/opt/ruby/bin:$PATH"
+    export PATH="$(gem environment | grep "EXECUTABLE DIRECTORY" | awk '{print $4}'):$PATH"
     # export LDFLAGS="-L/usr/local/opt/ruby/lib"
     # export CPPFLAGS="-I/usr/local/opt/ruby/include"
     # export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"

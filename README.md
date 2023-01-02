@@ -21,6 +21,14 @@ You can just install the one you need.
 
 My current favourite is: **Powelevel10k**
 
+#### Powelevel10k
+
+Clone this repo:
+
+```bash
+git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+```
+
 #### Spaceship
 
 Clone this repo:
@@ -33,14 +41,6 @@ Symlink `spaceship.zsh-theme` to your oh-my-zsh custom themes directory:
 
 ```bash
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-```
-
-#### Powelevel10k
-
-Clone this repo:
-
-```bash
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 ```
 
 #### Starship
@@ -270,6 +270,51 @@ This serves 2 purposes:
 - Do not show last login information with `-q` (same effect as `.hushlogin` but it seems faster because it does not even go to search the logs to find the last login event. (? check this info)).
 
 ## Optional tools
+
+### Notable Python packages
+
+```bash
+pip install \
+autopep8 \
+black \
+cookiecutter \
+flake8 \
+get-files-list \
+httpie \
+ipython \
+jupyterlab \
+matplotlib \
+numpy \
+opencv-python \
+pandas \
+Pillow \
+pip-tools \
+pyinstaller \
+requests \
+rich \
+scikit-learn \
+scipy \
+tqdm \
+virtualenv
+```
+
+### Notable NPM packages
+
+```bash
+npm install -g \
+share-cli \
+trash-cli \
+tldr \
+firebase-tools \
+yarn \
+prettier \
+eslint \
+jsdoc \
+browser-sync \
+npm-check-updates \
+speed-test \
+http-server-with-auth
+```
 
 ### Show images in terminal
 
