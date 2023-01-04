@@ -43,13 +43,13 @@
 
     # Show custom log of the commit history in graph mode.
 
-	lg = log --graph --pretty=custom
+	graph = log --graph --pretty=custom
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Show custom log of the commit history.
 
-    l = log --pretty=custom
+    log = log --pretty=custom
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
