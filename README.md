@@ -2,7 +2,59 @@
 
 My configuration, with installations steps.
 
+## Dependencies
+
+Theese dotfiles only work on Unix systems.
+
+You need to have **zsh** installed!
+
 ## Installation
+
+Install using the [install script](install.sh):
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
+```
+
+This will install all the dependencies, tools and dotfiles.
+
+Note: the script will ask for your password to install some dependencies.
+
+Note: still experimental!
+
+## Sync
+
+Use git to push and pull.
+
+If the changes are on the existing files they should be applied immediately, otherwise if you add new "folders" or files, redo the Stow process.
+
+### NEW! Use sup (Shell UPdate)
+
+Use the `sup` command in the terminal to update the dotfiles and update all the dependencies and tools installed above.
+
+## Manual installation
+
+### Brew
+
+On a Mac, install brew:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### Git
+
+#### OSX
+
+```bash
+brew install git
+```
+
+#### Debian
+
+```bash
+sudo apt-get install git
+```
 
 ### Oh My ZSH
 
@@ -90,6 +142,34 @@ List all themes with `fast-theme -l`.
 Run `fast-theme -t {theme-name}` option to obtain a snippet.
 
 I use `default` but I am not super happy with it.
+
+### Tmux
+
+#### OSX
+
+```bash
+brew install tmux
+```
+
+#### Debian
+
+```bash
+sudo apt-get install tmux
+```s
+
+### Ruby (mainly for colorls)
+
+#### OSX
+
+```bash
+brew install ruby
+```
+
+#### Debian
+
+```bash
+sudo snap install ruby --classic
+```
 
 ### Color LS
 
@@ -251,19 +331,11 @@ To install the dotfiles, first backup and remove all the dotfiles already there 
 stow -R */
 ```
 
-## Sync
-
-Use git to push and pull.
-
-If the changes are on the existing files they should be applied immediately, otherwise if you add new "folders" or files, redo the Stow process.
-
-### NEW! Use sup
-
-Use the `sup` command in the terminal to update the dotfiles and update all the dependencies and topols installed above.
-
 ## iTerm 2
 
 On Mac use iTerm2. Themes and configurations are in the `term` folder.
+
+In iTerm2 go to *Preferences* and then *General* and click on *Load preferences from a custom folder or URL* and select the `com.googlecode.iterm2.plist` file.
 
 ### Speedup
 

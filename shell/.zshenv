@@ -20,7 +20,6 @@ case "$(uname -s)" in
      ;;
 
    # Add here more strings to compare
-   # See correspondence table at the bottom of this answer
 
    *)
      PLATFORM='other'

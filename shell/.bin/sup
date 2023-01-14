@@ -1,7 +1,8 @@
 #!/bin/zsh
-# Shell update
+# Shell UPdate
 # This script updates all the tools used in the shell
 
+# Load colors
 autoload colors; colors
 
 # be sure to source the zshrc file to have access to omz, $ZSH_CUSTOM
@@ -113,7 +114,7 @@ if [ "$PLATFORM"  = 'mac' ]; then
     brew install stow
     echo ""
 fi
-if [ "$PLATFORM"  = 'linunx' ]; then
+if [ "$PLATFORM"  = 'linux' ]; then
     sudo apt-get update
 
     # Starship update
@@ -128,32 +129,32 @@ if [ "$PLATFORM"  = 'linunx' ]; then
 
     # Update fd
     echo $fg[green]"Updating fd..."$reset_color
-    sudo apt-get --only-upgrade install fd-find
+    sudo apt-get --only-upgrade install fd-find -y
     echo ""
 
     # Update tree
     echo $fg[green]"Updating tree..."$reset_color
-    sudo apt-get --only-upgrade install tree
+    sudo apt-get --only-upgrade install tree -y
     echo ""
 
     # Update bat
     echo $fg[green]"Updating bat..."$reset_color
-    sudo apt-get --only-upgrade install bat
+    sudo apt-get --only-upgrade install bat -y
     echo ""
 
     # Update fzf
     echo $fg[green]"Updating fzf..."$reset_color
-    sudo apt-get --only-upgrade install fzf
+    sudo apt-get --only-upgrade install fzf -y
     echo ""
 
     # Update direnv
     echo $fg[green]"Updating direnv..."$reset_color
-    sudo apt-get --only-upgrade install direnv
+    sudo apt-get --only-upgrade install direnv -y
     echo ""
 
     # Update stow
     echo $fg[green]"Updating stow..."$reset_color
-    sudo apt-get --only-upgrade install stow
+    sudo apt-get --only-upgrade install stow -y
     echo ""
 fi
 
