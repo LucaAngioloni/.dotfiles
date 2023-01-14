@@ -1,4 +1,4 @@
-#Compl for clorls
+# Compl for clorls
 # source $(dirname $(gem which colorls))/tab_complete.sh
 
 # faster implementation. gem which is slow.
@@ -6,7 +6,7 @@ MY_RUBY_BIN="${$(dirname $(which colorls))%/*}/gems"
 # if MY_RUBY_BIN exists, then source else run gem which
 if [[ -d $MY_RUBY_BIN ]]; then
     # On MacOS this works
-    source "$MY_RUBY_BIN/$(/bin/ls -l $MY_RUBY_BIN| grep colorls | awk '{print $(NF)}')/lib/tab_complete.sh"
+    source "$MY_RUBY_BIN/$(/bin/ls -l $MY_RUBY_BIN | grep colorls | tail -n 1 | awk '{print $(NF)}' | tr -d '\n')/lib/tab_complete.sh"
 else
     source $(dirname $(gem which colorls))/tab_complete.sh
 fi
