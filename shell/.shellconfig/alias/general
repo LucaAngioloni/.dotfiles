@@ -12,9 +12,10 @@ alias ydl='youtube-dl'
 alias ydl-a='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
 alias youtube-dl-audio='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
 
-eval "$(thefuck --alias)"
+# Not needed, use esc twice with the thefuck ohmyzsh plugin
+# eval "$(thefuck --alias)"
 
-alias aaa='fuck' # also use esc twice with the thefuck ohmyzsh plugin
+# alias aaa='fuck'
 
 alias nom='npm' # Because I always type it wrong
 alias npmg="npm list -g --depth=0 2>/dev/null"

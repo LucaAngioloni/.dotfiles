@@ -1,2 +1,6 @@
 #Compl for clorls
-source $(dirname $(gem which colorls))/tab_complete.sh
+# source $(dirname $(gem which colorls))/tab_complete.sh
+
+# faster implementation. gem which is slow.
+MY_RUBY_BIN="${$(dirname $(which colorls))%/*}/gems"
+source "$MY_RUBY_BIN/$(/bin/ls -l $MY_RUBY_BIN| grep colorls | awk '{print $(NF)}')/lib/tab_complete.sh"
