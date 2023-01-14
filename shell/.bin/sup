@@ -4,10 +4,8 @@
 
 autoload colors; colors
 
-# Get dotfiles root
-dotfiles_root=$(readlink -f ${0:a:h})/../..
-
-source $dotfiles_root/shell/.shellconfig/oh-my-zsh
+# be sure to source the zshrc file to have access to omz, $ZSH_CUSTOM
+source ~/.zshrc
 
 # ZSH TOOLS UPDATE ------------------------------------------------------------
 # Oh-my-zsh update
@@ -164,7 +162,7 @@ fi
 # DOTFILES UPDATE -------------------------------------------------------------
 # Cd to dotfiles root
 echo $fg[green]"Updating dotfiles..."$reset_color
-cd "$dotfiles_root"
+cd ~/.dotfiles
 # Update dotfiles
 git pull
 echo ""
