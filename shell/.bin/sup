@@ -1,0 +1,175 @@
+#!/bin/zsh
+# Shell update
+# This script updates all the tools used in the shell
+
+autoload colors; colors
+
+# Get dotfiles root
+dotfiles_root=$(readlink -f ${0:a:h})/../..
+
+source $dotfiles_root/shell/.shellconfig/oh-my-zsh
+
+# ZSH TOOLS UPDATE ------------------------------------------------------------
+# Oh-my-zsh update
+# echo $fg[green]"Updating Oh-my-zsh..."$reset_color # No need to print as it's already done in omz update
+omz update
+echo ""
+
+# Powerlevel10k update
+if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+    echo $fg[green]"Updating Powerlevel10k..."$reset_color
+    cd "$ZSH_CUSTOM/themes/powerlevel10k"
+    git pull
+    echo ""
+fi
+
+# Spaceship update
+if [ -d "$ZSH_CUSTOM/themes/spaceship-prompt" ]; then
+    echo $fg[green]"Updating Spaceship..."$reset_color
+    cd "$ZSH_CUSTOM/themes/spaceship-prompt"
+    git pull
+    echo ""
+fi
+
+# Zsh-autosuggestions update
+if [ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+    echo $fg[green]"Updating Zsh-autosuggestions..."$reset_color
+    cd "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+    git pull
+    echo ""
+fi
+
+# Zsh-completions update
+if [ -d "$ZSH_CUSTOM/plugins/zsh-completions" ]; then
+    echo $fg[green]"Updating Zsh-completions..."$reset_color
+    cd "$ZSH_CUSTOM/plugins/zsh-completions"
+    git pull
+    echo ""
+fi
+
+# # Zsh-syntax-highlighting update
+# if [ -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+#     echo $fg[green]"Updating Zsh-syntax-highlighting..."$reset_color
+#     cd "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+#     git pull
+#     echo ""
+# fi
+
+# fast-syntax-highlighting update
+if [ -d "$ZSH_CUSTOM/plugins/fast-syntax-highlighting" ]; then
+    echo $fg[green]"Updating fast-syntax-highlighting..."$reset_color
+    cd "$ZSH_CUSTOM/plugins/fast-syntax-highlighting"
+    git pull
+    echo ""
+fi
+
+# -----------------------------------------------------------------------------
+
+# CLI TOOLS UPDATE -----------------------------------------------------------
+
+# Update colorls
+echo $fg[green]"Updating colorls..."$reset_color
+gem update colorls
+echo ""
+
+if [ "$PLATFORM"  = 'mac' ]; then
+    brew update
+
+    # Starship update
+    # echo $fg[green]"Updating Starship..."$reset_color
+    # brew install starship
+    # echo ""
+
+    # Update thefuck
+    echo $fg[green]"Updating thefuck..."$reset_color
+    brew install thefuck
+    echo ""
+
+    # Update fd
+    echo $fg[green]"Updating fd..."$reset_color
+    brew install fd
+    echo ""
+
+    # Update tree
+    echo $fg[green]"Updating tree..."$reset_color
+    brew install tree
+    echo ""
+
+    # Update bat
+    echo $fg[green]"Updating bat..."$reset_color
+    brew install bat
+    echo ""
+
+    # Update fzf
+    echo $fg[green]"Updating fzf..."$reset_color
+    brew install fzf
+    echo ""
+
+    # Update direnv
+    echo $fg[green]"Updating direnv..."$reset_color
+    brew install direnv
+    echo ""
+
+    # Update stow
+    echo $fg[green]"Updating stow..."$reset_color
+    brew install stow
+    echo ""
+fi
+if [ "$PLATFORM"  = 'linunx' ]; then
+    sudo apt-get update
+
+    # Starship update
+    # echo $fg[green]"Updating Starship..."$reset_color
+    # curl -sS https://starship.rs/install.sh | sh
+    # echo ""
+
+    # Update thefuck
+    echo $fg[green]"Updating thefuck..."$reset_color
+    pip3 install thefuck --upgrade
+    echo ""
+
+    # Update fd
+    echo $fg[green]"Updating fd..."$reset_color
+    sudo apt-get --only-upgrade install fd-find
+    echo ""
+
+    # Update tree
+    echo $fg[green]"Updating tree..."$reset_color
+    sudo apt-get --only-upgrade install tree
+    echo ""
+
+    # Update bat
+    echo $fg[green]"Updating bat..."$reset_color
+    sudo apt-get --only-upgrade install bat
+    echo ""
+
+    # Update fzf
+    echo $fg[green]"Updating fzf..."$reset_color
+    sudo apt-get --only-upgrade install fzf
+    echo ""
+
+    # Update direnv
+    echo $fg[green]"Updating direnv..."$reset_color
+    sudo apt-get --only-upgrade install direnv
+    echo ""
+
+    # Update stow
+    echo $fg[green]"Updating stow..."$reset_color
+    sudo apt-get --only-upgrade install stow
+    echo ""
+fi
+
+# -----------------------------------------------------------------------------
+
+# DOTFILES UPDATE -------------------------------------------------------------
+# Cd to dotfiles root
+echo $fg[green]"Updating dotfiles..."$reset_color
+cd "$dotfiles_root"
+# Update dotfiles
+git pull
+echo ""
+
+# Restow dotfiles
+stow -R */
+
+# -----------------------------------------------------------------------------

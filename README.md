@@ -70,11 +70,26 @@ Install zsh-autosuggestions:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-Install zsh-syntax-highlighting:
+<!-- Install zsh-syntax-highlighting:
 
 ```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+``` -->
+
+Install fast-syntax-highlighting:
+
+```bash
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 ```
+
+Choose a theme with `fast-theme {theme-name}`.
+
+List all themes with `fast-theme -l`.
+
+Run `fast-theme -t {theme-name}` option to obtain a snippet.
+
+I use `default` but I am not super happy with it.
 
 ### Color LS
 
@@ -241,6 +256,10 @@ stow -R */
 Use git to push and pull.
 
 If the changes are on the existing files they should be applied immediately, otherwise if you add new "folders" or files, redo the Stow process.
+
+### NEW! Use sup
+
+Use the `sup` command in the terminal to update the dotfiles and update all the dependencies and topols installed above.
 
 ## iTerm 2
 

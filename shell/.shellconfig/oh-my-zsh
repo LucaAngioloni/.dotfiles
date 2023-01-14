@@ -84,7 +84,9 @@ HIST_STAMPS="dd.mm.yyyy"
 plugins=(
   zsh-completions
   zsh-autosuggestions
-  zsh-syntax-highlighting
+  # zsh-syntax-highlighting
+  fast-syntax-highlighting
+  zsh-interactive-cd
   git-auto-fetch
   colorize # ccat and cless: print with sintax highlighting
   colored-man-pages
