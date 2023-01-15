@@ -16,7 +16,7 @@ export FZF_DEFAULT_OPTS="
 --height=80%
 --info=inline
 --multi
---preview '~/.bin/_fzf_preview {}'
+--preview '_fzf_preview {}'
 --bind '?:toggle-preview'
 --bind 'alt-a:select-all'
 "
