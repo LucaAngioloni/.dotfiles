@@ -1,0 +1,39 @@
+#!/bin/zsh
+
+# fzf preview for various file types.
+#
+# Used in fzf config as follows:
+# export FZF_CTRL_T_OPTS=" --preview '_fzf_preview {}'"
+#
+
+# '([[ -f {} ]] && [[ {} =~ \.(jpg|jpeg|png|gif)$ ]] && command -v catimg >/dev/null 2>&1 && catimg -r 1 {}) || ([[ -f {} ]] && (bat --style=numbers,changes --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -500'
+
+file="$1"
+
+if [[ -d "${file}" ]]; then
+    tree -C "${file}" | less
+elif [[ $(file --mime "${file}") =~ binary ]]; then
+    if [[ "${file}" =~ \.(jpg|jpeg|png|gif)$ ]] && command -v catimg >/dev/null 2>&1; then
+        file_size=$(ls -lh "${file}" | awk '{print $5}')
+        echo "file size: ${file_size}"
+        # echo image dimensions
+        image_dimensions=$((command -v identify >/dev/null 2>&1 && identify -format "%wx%h" "${file}") || echo "N/A")
+        echo "image dimensions: ${image_dimensions}"
+        columns=$(tput cols)
+        columns=$((${columns} / 1.2))
+        catimg -w ${columns} "${file}"
+    else
+        echo "$(basename ${file})"
+        # echo file size and other info
+        file_size=$(ls -lh "${file}" | awk '{print $5}')
+        mime_type=$(file --mime-type "${file}" | awk '{print $2}')
+        mime_encoding=$(file --mime-encoding "${file}" | awk '{print $2}')
+        mime_description=$(file --mime "${file}")
+        echo "file size: ${file_size}"
+        echo "file type: ${mime_type}"
+        echo "file encoding: ${mime_encoding}"
+        # echo "file description: ${mime_description}"
+    fi
+else
+    bat --style=numbers,changes --color=always --line-range :500 "${file}" || cat "${file}"
+fi
