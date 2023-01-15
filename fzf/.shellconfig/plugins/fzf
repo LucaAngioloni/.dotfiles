@@ -1,5 +1,7 @@
 # fzf's command
 export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
+
+# These commands are rebinded below
 # CTRL-T's command
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_CTRL_T_OPTS=""
@@ -14,13 +16,14 @@ export FZF_DEFAULT_OPTS="
 --height=80%
 --info=inline
 --multi
---preview '([[ -f {} ]] && (bat --style=numbers,changes --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -600'
+--preview '([[ -f {} ]] && (bat --style=numbers,changes --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -500'
 --bind '?:toggle-preview'
+--bind 'alt-a:select-all'
 "
 
 # On Mac this file is created upon installation
 # On debian it needs to be created (see the README.md)
-source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # for more info see fzf/shell/completion.zsh
 _fzf_compgen_path() {
@@ -30,16 +33,16 @@ _fzf_compgen_dir() {
     fd --type d . "$1"
 }
 
-# make z without anything show with fzf
+# z - like normal z when used with arguments but displays an fzf prompt when used without
 unalias z 2> /dev/null
 z() {
-    [ $# -gt 0 ] && _z "$*" && return
-    cd "$(_z -l 2>&1 | fzf --preview-window=:hidden --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+    [ $# -gt 0 ] && zshz "$*" && return
+    cd "$(zshz -l 2>&1 | fzf --preview-window=:hidden --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
 # remap keybindings
-bindkey '\ec' fzf-file-widget
-bindkey '^T' fzf-cd-widget
+bindkey '\ef' fzf-file-widget
+bindkey '\ec' fzf-cd-widget
 
 
 # export FZF_DEFAULT_OPTS="
@@ -57,3 +60,15 @@ bindkey '^T' fzf-cd-widget
 # --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
 # --bind 'ctrl-v:execute(code {+})'
 # "
+
+
+# fkill - kill process
+fkill() {
+  local pid
+  pid=$(ps -ef |grep -v ^root | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
