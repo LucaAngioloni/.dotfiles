@@ -307,6 +307,20 @@ brew uninstall direnv
 sudo apt-get install direnv
 ```
 
+### Catimg
+
+#### OSX
+
+```bash
+brew install catimg
+```
+
+#### Debian
+
+```bash
+sudo apt-get install catimg
+```
+
 ### Stow
 
 Install [GNU stow](http://www.gnu.org/software/stow/).

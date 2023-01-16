@@ -109,6 +109,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     brew install direnv
     echo ""
 
+    # Update catimg
+    echo $fg[green]"Updating catimg..."$reset_color
+    brew install catimg
+    echo ""
+
     # Update stow
     echo $fg[green]"Updating stow..."$reset_color
     brew install stow
@@ -150,6 +155,11 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # Update direnv
     echo $fg[green]"Updating direnv..."$reset_color
     sudo apt-get --only-upgrade install direnv -y
+    echo ""
+
+    # Update catimg
+    echo $fg[green]"Updating catimg..."$reset_color
+    sudo apt-get --only-upgrade install catimg -y
     echo ""
 
     # Update stow
