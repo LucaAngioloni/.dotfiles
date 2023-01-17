@@ -10,13 +10,15 @@ You need to have **zsh** installed!
 
 ## Installation
 
+**Important: You need to have zsh installed!**
+
 Install using the [install script](install.sh):
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
 ```
 
-This will install all the dependencies, tools and dotfiles.
+This will install all the dependencies, _tools_ and _dotfiles_.
 
 Note: the script will ask for your password to install some dependencies.
 
@@ -155,7 +157,7 @@ brew install tmux
 
 ```bash
 sudo apt-get install tmux
-```s
+```
 
 ### Ruby (mainly for colorls)
 

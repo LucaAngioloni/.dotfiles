@@ -1,15 +1,15 @@
-#!/bin/sh
+#!/bin/zsh
 #
 # This script should be run via curl:
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
+#   zsh -c "$(curl -fsSL https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
 # or via wget:
-#   sh -c "$(wget -qO- https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
+#   zsh -c "$(wget -qO- https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
 # or via fetch:
-#   sh -c "$(fetch -o - https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
+#   zsh -c "$(fetch -o - https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
 #   wget https://raw.githubusercontent.com/LucaAngioloni/.dotfiles/main/install.sh
-#   sh install.sh
+#   zsh install.sh
 set -e
 
 # Make sure important variables exist if not already defined
@@ -73,18 +73,10 @@ user_can_sudo() {
   ! LANG= sudo -n -v 2>&1 | grep -q "may not run sudo"
 }
 
-command_exists zsh || {
-    echo "zsh is not installed! Please install zsh first."
-    exit 2
-}
-
 user_can_sudo || {
     echo "You don't have sudo privileges. Please run this script as root."
-    exit 3
+    exit 2
 }
-
-# Ensure we are running zsh
-exec zsh -l
 
 # Load colors
 autoload colors; colors
@@ -133,8 +125,15 @@ elif [ "$PLATFORM"  = 'linux' ]; then
 fi
 
 # Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 echo ""
+
+# Change the default shell to zsh
+echo $fg[green]"Changing the default shell to zsh..."$reset_color
+chsh -s $(which zsh)
+echo ""
+
+source ~/.zshrc
 
 if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
     echo $fg[green]"Installing Powerlevel10k..."$reset_color
@@ -241,7 +240,7 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # Install fd
     echo $fg[green]"Installing fd..."$reset_color
     sudo apt-get install fd-find -y
-    ln -s $(which fdfind) ~/.local/bin/fd
+    ln -s $(which fdfind) ~/.local/bin/fd || true
     echo ""
 
     # Install tree
@@ -252,7 +251,7 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # Install bat
     echo $fg[green]"Installing bat..."$reset_color
     sudo apt-get install bat -y
-    ln -s /usr/bin/batcat ~/.local/bin/bat
+    ln -s /usr/bin/batcat ~/.local/bin/bat || true
     echo ""
 
     # Install fzf
@@ -312,9 +311,16 @@ fi
 if [ -f ~/.zprofile ]; then
     mv ~/.zprofile ~/.zprofile.bak
 fi
+if [ -f ~/.bashrc ]; then
+    mv ~/.bashrc ~/.bashrc.bak
+fi
 
 # TODO: do the same thing for every file in the .dotfiles folder that we want to backup before stowing
 
 cd ~/.dotfiles
-stow -R */
+stow --adopt */ # Stow all the folders in the .dotfiles folder
+git restore .
 echo ""
+
+cd
+exec zsh -l
