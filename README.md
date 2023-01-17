@@ -1,6 +1,6 @@
 # .dotfiles
 
-My configuration, with installations steps.
+My configuration, with installation steps.
 
 ## Dependencies
 
