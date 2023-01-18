@@ -41,7 +41,7 @@ z() {
 }
 
 # remap keybindings
-bindkey '\ef' fzf-file-widget
+bindkey '\ed' fzf-file-widget
 bindkey '\ec' fzf-cd-widget
 
 
