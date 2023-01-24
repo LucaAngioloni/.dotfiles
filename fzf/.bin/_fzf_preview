@@ -22,6 +22,7 @@ elif [[ $(file --mime "${file}") =~ binary ]]; then
         columns=$(tput cols)
         columns=$((${columns} / 1.2))
         catimg -w ${columns} "${file}"
+        # chafa --symbols=block --fill=space --size=${columns}x --colors=256 "${file}"
     else
         echo "$(basename ${file})"
         # echo file size and other info

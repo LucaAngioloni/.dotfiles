@@ -422,34 +422,3 @@ npm-check-updates \
 speed-test \
 http-server-with-auth
 ```
-
-### Show images in terminal
-
-Repo: https://github.com/hackerb9/lsix
-change configuration in the lsix script:
-
-```bash
-# The following defaults may be overridden if autodetection succeeds.
-numcolors=16     # Default number of colors in the palette.
-background=white # Default montage background.
-foreground=black # Default text color.
-width=1200	 # Default width of screen in pixels.
-
-# Feel free to edit these defaults to your liking.
-tilesize=300	       # Width and height of each tile in the montage.
-tilewidth=$tilesize    # (or specify separately, if you prefer)
-tileheight=$tilesize
-
-# If you get questionmarks for Unicode filenames, try using a different font.
-# You can list fonts available using `convert -list font`.
-#fontfamily=Droid-Sans-Fallback		# Great Asian font coverage
-#fontfamily=Dejavu-Sans			# Wide coverage, comes with GNU/Linux
-#fontfamily=Mincho			# Wide coverage, comes with MS Windows
-
-# Default font size is based on width of each tile in montage.
-fontsize=$((tilewidth/10))
-#fontsize=16		     # (or set the point size directly, if you prefer)
-
-timeout=0.25		    # How long to wait for terminal to respond
-			    # to a control sequence (in seconds).
-```
