@@ -66,11 +66,6 @@ fi
 
 # CLI TOOLS UPDATE -----------------------------------------------------------
 
-# Update colorls
-echo $fg[green]"Updating colorls..."$reset_color
-gem update colorls
-echo ""
-
 if [ "$PLATFORM"  = 'mac' ]; then
     brew update
 
@@ -117,6 +112,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     # Update stow
     echo $fg[green]"Updating stow..."$reset_color
     brew install stow
+    echo ""
+
+    # Update colorls
+    echo $fg[green]"Updating colorls..."$reset_color
+    gem update colorls
     echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
@@ -165,6 +165,11 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # Update stow
     echo $fg[green]"Updating stow..."$reset_color
     sudo apt-get --only-upgrade install stow -y
+    echo ""
+
+    # Update colorls
+    echo $fg[green]"Updating colorls..."$reset_color
+    sudo gem update colorls
     echo ""
 fi
 

@@ -124,16 +124,19 @@ elif [ "$PLATFORM"  = 'linux' ]; then
     fi
 fi
 
-# Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-echo ""
+if [ ! -d "~/.oh-my-zsh" ]; then
+    # Install Oh My Zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    echo ""
+fi
 
 # Change the default shell to zsh
 echo $fg[green]"Changing the default shell to zsh..."$reset_color
 chsh -s $(which zsh)
 echo ""
 
-source ~/.zshrc
+# source ~/.zshrc
+export ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
     echo $fg[green]"Installing Powerlevel10k..."$reset_color
@@ -217,6 +220,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     echo $fg[green]"Installing ruby..."$reset_color
     brew install ruby
     echo ""
+
+    # Install colorls
+    echo $fg[green]"Installing colorls..."$reset_color
+    gem install colorls
+    echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     mkdir -p ~/.local/bin # For fd and bat
@@ -225,6 +233,11 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # echo $fg[green]"Installing Starship..."$reset_color
     # curl -sS https://starship.rs/install.sh | sh
     # echo ""
+
+    # Install build-essential
+    echo $fg[green]"Installing build-essential..."$reset_color
+    sudo apt-get install build-essential -y
+    echo ""
 
     # Install thefuck
     if ! command_exists pip3; then
@@ -291,14 +304,15 @@ EOF
     # Install ruby
     echo $fg[green]"Installing ruby..."$reset_color
     # Install with snap
-    sudo snap install ruby --classic
+    # sudo snap install ruby --classic
+    sudo apt-get install ruby-full -y
+    echo ""
+
+    # Install colorls
+    echo $fg[green]"Installing colorls..."$reset_color
+    sudo gem install colorls
     echo ""
 fi
-
-# Install colorls
-echo $fg[green]"Installing colorls..."$reset_color
-gem install colorls
-echo ""
 
 echo $fg[green]"Installing .dotfiles..."$reset_color
 git clone https://github.com/LucaAngioloni/.dotfiles.git ~/.dotfiles
