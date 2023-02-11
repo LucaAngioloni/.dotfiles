@@ -1,13 +1,15 @@
-#colorls aliases
-alias l='colorls --sort-dirs --gs'
-alias lr='colorls --sort-dirs --gs --report'
-alias ls='colorls --sort-dirs --gs'
-alias la='colorls --sort-dirs --gs -a'
-alias lar='colorls --sort-dirs --gs -a --report'
-alias ll='colorls --sort-dirs --gs -l'
-alias llr='colorls --sort-dirs --gs -l --report'
-alias lla='colorls --sort-dirs --gs -la'
-alias llar='colorls --sort-dirs --gs -la --report'
-alias lt='colorls --gs --tree .'
-alias tree='colorls --gs --tree'
-alias lta='colorls --gs --tree . -a'
+if [ "$MY_LS_COMMAND"  = 'colorls' ]; then
+    #colorls aliases
+    alias l='colorls --sort-dirs --gs'
+    alias lr='colorls --sort-dirs --gs --report'
+    alias ls='colorls --sort-dirs --gs'
+    alias la='colorls --sort-dirs --gs -a'
+    alias lar='colorls --sort-dirs --gs -a --report'
+    alias ll='colorls --sort-dirs --gs -l'
+    alias llr='colorls --sort-dirs --gs -l --report'
+    alias lla='colorls --sort-dirs --gs -la'
+    alias llar='colorls --sort-dirs --gs -la --report'
+    alias lt='colorls --gs --tree .'
+    alias tree='colorls --gs --tree'
+    alias lta='colorls --gs --tree . -a'
+fi

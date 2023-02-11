@@ -30,7 +30,7 @@ Use git to push and pull.
 
 If the changes are on the existing files they should be applied immediately, otherwise if you add new "folders" or files, redo the Stow process.
 
-### NEW! Use sup (Shell UPdate)
+### Use sup (Shell UPdate)
 
 Use the `sup` command in the terminal to update the dotfiles and update all the dependencies and tools installed above.
 
@@ -181,6 +181,20 @@ Install gem:
 
 ```bash
 gem install colorls
+```
+
+### LSD
+
+#### OSX
+
+```bash
+brew install lsd
+```
+
+#### Debian
+
+```bash
+sudo apt-get install lsd
 ```
 
 ### The Fuck
@@ -346,6 +360,12 @@ To install the dotfiles, first backup and remove all the dotfiles already there 
 ```bash
 stow -R */
 ```
+
+## Font
+
+Use a NERD font. I use [Fura Code](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
+
+N.B. The font must be installed in the system and it is needed to show icons and advanced graphics.
 
 ## iTerm 2
 

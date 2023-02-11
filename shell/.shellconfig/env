@@ -17,8 +17,8 @@ if [ "$PLATFORM"  = 'mac' ]; then
     alias pip3="$HOME/anaconda3/bin/pip"
     alias python3="$HOME/anaconda3/bin/python"
 
-    # Removes the (env-name) when activating an environment. It is redundant since the spaceship theme does this already (better). If the theme is changed re-activate this
-    conda config --set changeps1 False
+    # Removes the (env-name) when activating an environment. It is redundant since the spaceship and powerllevel10k themes do this already (better). If the theme is changed re-activate this
+    # conda config --set changeps1 False
 
     export PATH=$HOME/bin:/usr/local/bin:$PATH
     export PATH="/usr/local/sbin:$PATH"
@@ -37,6 +37,7 @@ if [ "$PLATFORM"  = 'mac' ]; then
 
     export EDITOR='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 elif [ "$PLATFORM"  = 'linux' ]; then
+    # : # empty command, remove if you add something here
     export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
 fi
 

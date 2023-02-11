@@ -118,6 +118,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     echo $fg[green]"Updating colorls..."$reset_color
     gem update colorls
     echo ""
+
+    # Update lsd
+    echo $fg[green]"Updating lsd..."$reset_color
+    brew install lsd
+    echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     sudo apt-get update
@@ -170,6 +175,11 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # Update colorls
     echo $fg[green]"Updating colorls..."$reset_color
     sudo gem update colorls
+    echo ""
+
+    # Update lsd
+    echo $fg[green]"Updating lsd..."$reset_color
+    sudo apt-get --only-upgrade install lsd -y
     echo ""
 fi
 

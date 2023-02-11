@@ -225,6 +225,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     echo $fg[green]"Installing colorls..."$reset_color
     gem install colorls
     echo ""
+
+    # Install lsd
+    echo $fg[green]"Installing lsd..."$reset_color
+    brew install lsd
+    echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     mkdir -p ~/.local/bin # For fd and bat
@@ -311,6 +316,11 @@ EOF
     # Install colorls
     echo $fg[green]"Installing colorls..."$reset_color
     sudo gem install colorls
+    echo ""
+
+    # Install lsd
+    echo $fg[green]"Installing lsd..."$reset_color
+    sudo apt-get install lsd -y
     echo ""
 fi
 

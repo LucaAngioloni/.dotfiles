@@ -1,0 +1,13 @@
+if [ "$MY_LS_COMMAND"  = 'lsd' ]; then
+    #lsd aliases
+    alias l='lsd'
+    alias ls='lsd'
+    alias la='lsd -A'
+    alias ll='lsd -l'
+    alias lla='lsd -l -A'
+    alias lt='lsd --tree'
+    alias llt='lsd --tree -l'
+    alias tree='lsd --tree'
+    alias lta='lsd --tree -A'
+    alias llta='lsd --tree -A -l'
+fi
