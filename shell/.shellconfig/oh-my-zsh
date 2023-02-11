@@ -86,7 +86,7 @@ plugins=(
   zsh-autosuggestions
   # zsh-syntax-highlighting
   fast-syntax-highlighting
-  zsh-interactive-cd
+  zsh-interactive-cd # to use fzf when double tab on cd instead of the default
   git-auto-fetch
   colorize # ccat and cless: print with sintax highlighting
   colored-man-pages
@@ -101,13 +101,14 @@ plugins=(
   # history # aliases: h -> history,  hs -> history | grep, hsi -> history | grep -i
   thefuck # press esc twice to activate thefuck
   transfer # use transfer + file/dir to upload to transfer.sh
-  # zsh-interactive-cd # to use fzf when double tab on cd instead of the default
   # git # aliases
   # tmux # aliases and functions
   # python # aliases
   # emoji
   # per-directory-history
 )
+
+zic_case_insensitive="true" # make zsh-interactive-cd case insensitive
 
 # Change per-directory-history to use ^H instead of ^G
 PER_DIRECTORY_HISTORY_TOGGLE="^H"
