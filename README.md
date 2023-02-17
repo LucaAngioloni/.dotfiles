@@ -337,6 +337,34 @@ brew install catimg
 sudo apt-get install catimg
 ```
 
+### Ripgrep
+
+#### OSX
+
+```bash
+brew install ripgrep
+```
+
+#### Debian
+
+```bash
+sudo apt-get install ripgrep
+```
+
+### Neovim
+
+#### OSX
+
+```bash
+brew install neovim
+```
+
+#### Debian
+
+```bash
+sudo apt-get install neovim
+```
+
 ### Stow
 
 Install [GNU stow](http://www.gnu.org/software/stow/).

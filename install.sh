@@ -226,10 +226,20 @@ if [ "$PLATFORM"  = 'mac' ]; then
     gem install colorls
     echo ""
 
-    # Install lsd
-    echo $fg[green]"Installing lsd..."$reset_color
-    brew install lsd
+    # Install ripgrep
+    echo $fg[green]"Installing ripgrep..."$reset_color
+    brew install ripgrep
     echo ""
+
+    # Install neovim
+    echo $fg[green]"Installing neovim..."$reset_color
+    brew install neovim
+    echo ""
+
+    # # Install lsd
+    # echo $fg[green]"Installing lsd..."$reset_color
+    # brew install lsd
+    # echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     mkdir -p ~/.local/bin # For fd and bat
@@ -318,9 +328,25 @@ EOF
     sudo gem install colorls
     echo ""
 
-    # Install lsd
-    echo $fg[green]"Installing lsd..."$reset_color
-    sudo apt-get install lsd -y
+    # Install ripgrep
+    echo $fg[green]"Installing ripgrep..."$reset_color
+    sudo apt-get install ripgrep -y
+    echo ""
+
+    # Install neovim
+    echo $fg[green]"Installing neovim..."$reset_color
+    sudo apt-get install neovim -y
+    echo ""
+
+    # # Install lsd
+    # echo $fg[green]"Installing lsd..."$reset_color
+    # sudo apt-get install lsd -y
+    # echo ""
+fi
+
+if [ ! -d "$HOME/.config/nvim" ]; then
+    echo $fg[green]"Installing nvchad..."$reset_color
+    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
     echo ""
 fi
 

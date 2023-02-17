@@ -119,10 +119,20 @@ if [ "$PLATFORM"  = 'mac' ]; then
     gem update colorls
     echo ""
 
-    # Update lsd
-    echo $fg[green]"Updating lsd..."$reset_color
-    brew install lsd
+    # Update ripgrep
+    echo $fg[green]"Updating ripgrep..."$reset_color
+    brew install ripgrep
     echo ""
+
+    # Update neovim
+    echo $fg[green]"Updating neovim..."$reset_color
+    brew install neovim
+    echo ""
+
+    # # Update lsd
+    # echo $fg[green]"Updating lsd..."$reset_color
+    # brew install lsd
+    # echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     sudo apt-get update
@@ -177,9 +187,26 @@ if [ "$PLATFORM"  = 'linux' ]; then
     sudo gem update colorls
     echo ""
 
-    # Update lsd
-    echo $fg[green]"Updating lsd..."$reset_color
-    sudo apt-get --only-upgrade install lsd -y
+    # Update ripgrep
+    echo $fg[green]"Updating ripgrep..."$reset_color
+    sudo apt-get --only-upgrade install ripgrep -y
+    echo ""
+
+    # Update neovim
+    echo $fg[green]"Updating neovim..."$reset_color
+    sudo apt-get --only-upgrade install neovim -y
+    echo ""
+
+    # # Update lsd
+    # echo $fg[green]"Updating lsd..."$reset_color
+    # sudo apt-get --only-upgrade install lsd -y
+    # echo ""
+fi
+
+if [ -d "$HOME/.config/nvim" ]; then
+    echo $fg[green]"Updating Nvchad..."$reset_color
+    cd "$HOME/.config/nvim"
+    git pull --depth=20
     echo ""
 fi
 
