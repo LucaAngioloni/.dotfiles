@@ -39,6 +39,7 @@ if [ "$PLATFORM"  = 'mac' ]; then
 elif [ "$PLATFORM"  = 'linux' ]; then
     # : # empty command, remove if you add something here
     export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
+    export PATH=/snap/bin:$PATH
 fi
 
 export MY_PATH=$PATH
