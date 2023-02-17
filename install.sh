@@ -335,7 +335,7 @@ EOF
 
     # Install neovim
     echo $fg[green]"Installing neovim..."$reset_color
-    sudo apt-get install neovim -y
+    sudo snap install nvim --classic # Install with snap because apt-get is outdated
     echo ""
 
     # # Install lsd

@@ -194,7 +194,7 @@ if [ "$PLATFORM"  = 'linux' ]; then
 
     # Update neovim
     echo $fg[green]"Updating neovim..."$reset_color
-    sudo apt-get --only-upgrade install neovim -y
+    sudo snap refresh nvim
     echo ""
 
     # # Update lsd

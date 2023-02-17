@@ -362,7 +362,13 @@ brew install neovim
 #### Debian
 
 ```bash
-sudo apt-get install neovim
+sudo snap install nvim --classic
+```
+
+### NVChad
+
+```bash
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 ```
 
 ### Stow
