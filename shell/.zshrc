@@ -1,6 +1,6 @@
 # shellcheck disable=SC2148
 
-# zmodload zsh/zprof
+[ -z "$ZPROF" ] || zmodload zsh/zprof
 
 export MY_LS_COMMAND="colorls"
 
@@ -35,4 +35,4 @@ for function_folder in ~/.functions/*(/); do
     autoload -Uz $function_folder/*(.:t);
 done;
 
-# zprof
+[ -z "$ZPROF" ] || zprof
