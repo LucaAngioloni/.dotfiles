@@ -1,5 +1,5 @@
 layout_anaconda() {
   source $HOME/.shellconfig/env
-  source $HOME/.shellconfig/plugins/condaenv
+  source $HOME/.shellconfig/plugins/functions/condaenv
   condaenv $@
 }
