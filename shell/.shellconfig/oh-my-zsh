@@ -7,7 +7,7 @@ export ZSH=~/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="startship"
+# ZSH_THEME="starship"
 # ZSH_THEME="spaceship"
 
 if [[ $ZSH_THEME = "spaceship" ]];
@@ -27,7 +27,7 @@ then
   # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
-if [[ $ZSH_THEME = "startship" ]];
+if [[ $ZSH_THEME = "starship" ]];
 then
   ZSH_THEME=""
   eval "$(starship init zsh)"
