@@ -432,6 +432,10 @@ This serves 2 purposes:
 
 ## Optional tools
 
+### Brew formulae
+
+Install using `brew bundle install` while in the root directory of this repo where the `Brewfile` is.
+
 ### Notable Python packages
 
 ```bash

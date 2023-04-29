@@ -5,3 +5,5 @@ shell/.shellconfig/plugins/bw
 .DS_Store
 
 .vscode
+
+Brewfile.lock.json
