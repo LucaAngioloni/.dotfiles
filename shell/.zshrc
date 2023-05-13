@@ -20,6 +20,11 @@ fi
 
 source ~/.shellconfig/oh-my-zsh
 
+# Set word splitting to be more like bash, i.e. split on spaces and newlines
+# https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#kill-word-or-backward-kill-word-do--dont-delete-a-symbol-wordchars
+# export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+export WORDCHARS='*?_-[]~=/&;!#$%^(){}<>'
+
 # Source aliases
 for alias_file in ~/.shellconfig/alias/***/*; source "$alias_file"
 

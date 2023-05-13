@@ -2,8 +2,6 @@
 
 #update zshrc
 rezsh(){
-    cd ~;
-    source .zshenv;
-    source .zshrc;
-    cd - > /dev/null;
+    # https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
+    exec zsh;
 }

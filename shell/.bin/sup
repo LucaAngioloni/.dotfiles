@@ -11,7 +11,7 @@ source ~/.zshrc
 # ZSH TOOLS UPDATE ------------------------------------------------------------
 # Oh-my-zsh update
 # echo $fg[green]"Updating Oh-my-zsh..."$reset_color # No need to print as it's already done in omz update
-omz update
+omz update --unattended
 echo ""
 
 # Powerlevel10k update
