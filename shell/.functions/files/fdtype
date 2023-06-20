@@ -11,15 +11,18 @@ fdtype(){
         return 1
     fi
 
-    if [ $# -eq 1 ]; then
+    if [ $# -eq 0 ]; then
+        help
+        return 2;
+    elif [ $# -eq 1 ]; then
         if [[ $1 == "-h" ]]; then
             help
-            return 2;
+            return 3;
         elif beginswith "-t=" "$1"; then
             type=${1#*=}
         else
             help
-            return 3;
+            return 4;
         fi
     elif [ $# -eq 2 ]; then
         if beginswith "-t=" "$1"; then
@@ -31,7 +34,7 @@ fdtype(){
                 type=${2#*=}
             else
                 help
-                return 2
+                return 5
             fi
         fi
     fi
