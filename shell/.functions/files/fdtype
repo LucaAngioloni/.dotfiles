@@ -1,0 +1,40 @@
+fdtype(){
+    help(){
+        echo "Find every file of a given type recursively in a folder"
+        echo "Usage: fdtype [<path> -t=<type> | -t=<type> | -h]"
+    }
+
+    local folder="."
+    local type=""
+    if [ $# -ge 3 ]; then
+        help
+        return 1
+    fi
+
+    if [ $# -eq 1 ]; then
+        if [[ $1 == "-h" ]]; then
+            help
+            return 2;
+        elif beginswith "-t=" "$1"; then
+            type=${1#*=}
+        else
+            help
+            return 3;
+        fi
+    elif [ $# -eq 2 ]; then
+        if beginswith "-t=" "$1"; then
+            type=${1#*=}
+            folder="$2"
+        else
+            folder="$1"
+            if beginswith "-t=" "$2"; then
+                type=${2#*=}
+            else
+                help
+                return 2
+            fi
+        fi
+    fi
+
+    find "$folder" -type f -name "*.$type" 2>/dev/null
+}
