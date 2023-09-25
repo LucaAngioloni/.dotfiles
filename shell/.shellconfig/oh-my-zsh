@@ -88,7 +88,7 @@ plugins=(
   fast-syntax-highlighting
   zsh-interactive-cd # to use fzf when double tab on cd instead of the default
   git-auto-fetch
-  colorize # ccat and cless: print with sintax highlighting
+  colorize # ccat and cless: print with sintax highlighting (needs pygments and or chroma installed: pip install)
   colored-man-pages
   cp # adds the cpv command (rsync below) to copy files with progress bar and all other features of rsync
   urltools # urlencode and urldecode strings
