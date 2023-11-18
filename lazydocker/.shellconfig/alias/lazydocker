@@ -1,2 +1,2 @@
 # Lazy Docker (requires docker installed)
-alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v ~/.config/lazydocker/config:/.config/jesseduffield/lazydocker lazyteam/lazydocker'
+alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v ~/.config/lazydocker:/.config/jesseduffield/lazydocker lazyteam/lazydocker'

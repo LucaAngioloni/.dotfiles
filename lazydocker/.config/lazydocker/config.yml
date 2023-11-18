@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazydocker.json
 gui:
   scrollHeight: 2
   language: "auto" # one of 'auto' | 'en' | 'pl' | 'nl' | 'de' | 'tr'
