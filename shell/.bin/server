@@ -3,7 +3,7 @@
 server(){
     local usage="Usage: server [auth <user> <pssw> | php [local(host)|ip] | python [upload] | refresh]"
     if [[ $# == 0 ]]; then
-        python -m http.server
+        python -m http.server --bind 0.0.0.0
     else
         if [[ $# != 0 ]]; then
             if [[ $1 == "php" ]]; then
@@ -23,12 +23,12 @@ server(){
                 fi
             elif [[ $1 == "python" ]]; then
                 if [[ $# == 1 ]]; then
-                    python -m http.server
+                    python -m http.server --bind 0.0.0.0
                 else
                     if [[ $2 == "upload" ]]; then
                         python ~/.scripts/python_server.py
                     else
-                        python -m http.server
+                        python -m http.server --bind 0.0.0.0
                     fi
                 fi
             elif [[ $1 == "auth" ]]; then
@@ -44,7 +44,7 @@ server(){
                 echo "$usage"
             fi
         else
-            python -m http.server
+            python -m http.server --bind 0.0.0.0
         fi
     fi
 }
