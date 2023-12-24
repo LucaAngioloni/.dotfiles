@@ -42,7 +42,7 @@ for function_folder in ~/.functions/*(/); do
 done;
 
 # If $TMUX_SSH_ON is set, start a tmux session right away when sshing
-if [ -x /usr/bin/tmux ] && [ "$TMUX_SSH_ON" == "true" ] && [ -n "$SSH_CONNECTION" ]; then
+if [ -x /usr/bin/tmux ] && [ -n "$TMUX_SSH_ON" ] && [ -n "$SSH_CONNECTION" ]; then
     if ! tmux has-session -t default 2>/dev/null; then
         tmux new-session -d -s default "zsh"
     fi
