@@ -77,7 +77,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # If $TMUX_SSH_ON is set, start a tmux session right away when sshing
 if [ -x /usr/bin/tmux ] && [ -n "$TMUX_SSH_ON" ] && [ -n "$SSH_CONNECTION" ] && [ -n "$SSH_TTY" ]; then
     ZSH_TMUX_AUTOSTART=true
-    ZSH_TMUX_DEFAULT_SESSION_NAME="default"
+    # ZSH_TMUX_DEFAULT_SESSION_NAME="default"
     # This also creates some aliases for tmux
     # Uses the tmux oh-my-zsh plugin
 fi
