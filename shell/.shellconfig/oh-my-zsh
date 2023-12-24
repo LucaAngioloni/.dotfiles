@@ -74,6 +74,14 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd.mm.yyyy"
 
+# If $TMUX_SSH_ON is set, start a tmux session right away when sshing
+if [ -x /usr/bin/tmux ] && [ -n "$TMUX_SSH_ON" ] && [ -n "$SSH_CONNECTION" ]; then
+    ZSH_TMUX_AUTOSTART=true
+    ZSH_TMUX_DEFAULT_SESSION_NAME="default"
+    # This also creates some aliases for tmux
+    # Uses the tmux oh-my-zsh plugin
+fi
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -102,7 +110,7 @@ plugins=(
   thefuck # press esc twice to activate thefuck
   transfer # use transfer + file/dir to upload to transfer.sh
   # git # aliases
-  # tmux # aliases and functions
+  tmux # aliases and functions
   # python # aliases
   # emoji
   # per-directory-history
@@ -122,6 +130,3 @@ source $ZSH/oh-my-zsh.sh
 # No need to load them because `$ZSH/oh-my-zsh.sh` already loads it.
 # zsh-completions
 # autoload -U compinit && compinit
-
-# This is needed with the tmux plugin active, otherwise writing `tmux` alone will do `tmux a` and not create a new window.
-# ZSH_TMUX_AUTOCONNECT=false
