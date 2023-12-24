@@ -26,4 +26,5 @@ case "$(uname -s)" in
      ;;
 esac
 
-source ~/.shellconfig/env
+# Source envs
+for env_file in ~/.shellconfig/envs/***/*; source "$env_file"
