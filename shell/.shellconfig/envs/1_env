@@ -42,4 +42,7 @@ elif [ "$PLATFORM"  = 'linux' ]; then
     export PATH=/snap/bin:$PATH
 fi
 
+# GPG TTY
+export GPG_TTY=$(tty)
+
 export MY_PATH=$PATH

@@ -6,6 +6,7 @@
 [user]
 	name = Luca Angioloni
 	email = lucaangioloni@gmail.com
+	# signingkey = xxxxxxxxxxxxxxxxx
 [pull]
 	rebase = false
 [core]
@@ -102,3 +103,5 @@
     amendm = commit --amend
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# [commit]
+# 	gpgsign = true
