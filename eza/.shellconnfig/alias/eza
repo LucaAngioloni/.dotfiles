@@ -1,0 +1,12 @@
+if [ "$MY_LS_COMMAND"  = 'eza' ]; then
+    #eza aliases
+    alias l='eza --color=always --icons=always --group-directories-first'
+    alias ls='eza --color=always --icons=always --group-directories-first'
+    alias la='eza --color=always --icons=always --group-directories-first -a'
+    alias ll='eza --color=always --icons=always --group-directories-first --git --git-repos-no-status --time-style=long-iso -lg'
+    alias lla='eza --color=always --icons=always --group-directories-first --git --git-repos-no-status --time-style=long-iso -lag'
+    alias ld='eza --color=always --icons=always --group-directories-first --git --git-repos-no-status --time-style=long-iso -lDg'
+    alias lf='eza --color=always --icons=always --group-directories-first --git --git-repos-no-status --time-style=long-iso -lFg'
+    # alias lf='eza -lF --color=always | grep -v /'
+    alias lh='eza --color=always --icons=always --group-directories-first -dl .*'
+fi
