@@ -20,20 +20,36 @@ if [ "$PLATFORM"  = 'mac' ]; then
     # Removes the (env-name) when activating an environment. It is redundant since the spaceship and powerllevel10k themes do this already (better). If the theme is changed re-activate this
     # conda config --set changeps1 False
 
-    export PATH=$HOME/bin:/usr/local/bin:$PATH
-    export PATH="/usr/local/sbin:$PATH"
+    # Homebrew has a different path on M1
+    # You would find the path by running `brew --prefix`
+    # It is slow to run `brew --prefix` every time, so I have hardcoded the path here
+    if [ "$ARCHITECTURE" = 'arm64' ]; then
+        export PATH="/opt/homebrew/bin:$PATH"
+        export PATH="/opt/homebrew/sbin:$PATH"
 
-    #Google Cloud
-    export CLOUDSDK_PYTHON="/usr/local/opt/python@3/libexec/bin/python"
-    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-    source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+        #Ruby
+        export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+        #Google Cloud
+        export CLOUDSDK_PYTHON="/opt/homebrew/opt/python@3/libexec/bin/python"
+        source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+        source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+    else
+        export PATH="/usr/local/bin:$PATH"
+        export PATH="/usr/local/sbin:$PATH"
+
+        #Ruby
+        export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+        #Google Cloud
+        export CLOUDSDK_PYTHON="/usr/local/opt/python@3/libexec/bin/python"
+        source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+        source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+    fi
+    export PATH=$HOME/bin:$PATH
 
     #Ruby
-    export PATH="/usr/local/opt/ruby/bin:$PATH"
     export PATH="$(gem environment | grep "EXECUTABLE DIRECTORY" | awk '{print $4}'):$PATH"
-    # export LDFLAGS="-L/usr/local/opt/ruby/lib"
-    # export CPPFLAGS="-I/usr/local/opt/ruby/include"
-    # export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 
     export EDITOR='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 elif [ "$PLATFORM"  = 'linux' ]; then

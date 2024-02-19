@@ -101,6 +101,7 @@
     # commit message.
 
     amendm = commit --amend
+	fpush = push --force-with-lease
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # [commit]

@@ -45,6 +45,8 @@ if [ "$PLATFORM"  = 'other' ]; then
     exit 1
 fi
 
+ARCHITECTURE=$(uname -m)
+
 command_exists() {
   command -v "$@" >/dev/null 2>&1
 }
@@ -88,11 +90,20 @@ export PATH=~/.bin:$PATH
 export PATH=~/.local/bin:$PATH
 
 if [ "$PLATFORM"  = 'mac' ]; then
-    export PATH=$HOME/bin:/usr/local/bin:$PATH
-    export PATH="/usr/local/sbin:$PATH"
+    if [ "$ARCHITECTURE" = 'arm64' ]; then
+        export PATH="/opt/homebrew/bin:$PATH"
+        export PATH="/opt/homebrew/sbin:$PATH"
 
-    #Ruby
-    export PATH="/usr/local/opt/ruby/bin:$PATH"
+        #Ruby
+        export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+    else
+        export PATH="/usr/local/bin:$PATH"
+        export PATH="/usr/local/sbin:$PATH"
+
+        #Ruby
+        export PATH="/usr/local/opt/ruby/bin:$PATH"
+    fi
+    export PATH=$HOME/bin:$PATH
 elif [ "$PLATFORM"  = 'linux' ]; then
     export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
 fi
