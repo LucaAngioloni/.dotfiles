@@ -247,6 +247,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     brew install neovim
     echo ""
 
+    # Install duf
+    echo $fg[green]"Installing duf..."$reset_color
+    brew install duf
+    echo ""
+
     # # Install lsd
     # echo $fg[green]"Installing lsd..."$reset_color
     # brew install lsd
@@ -347,6 +352,11 @@ EOF
     # Install neovim
     echo $fg[green]"Installing neovim..."$reset_color
     sudo snap install nvim --classic # Install with snap because apt-get is outdated
+    echo ""
+
+    # Install duf
+    echo $fg[green]"Installing duf..."$reset_color
+    sudo apt-get install duf -y
     echo ""
 
     # # Install lsd

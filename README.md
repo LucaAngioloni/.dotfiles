@@ -371,6 +371,20 @@ sudo snap install nvim --classic
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 ```
 
+### DUF
+
+#### OSX
+
+```bash
+brew install duf
+```
+
+#### Debian
+
+```bash
+sudo apt-get install duf
+```
+
 ### Stow
 
 Install [GNU stow](http://www.gnu.org/software/stow/).

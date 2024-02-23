@@ -129,6 +129,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     brew install neovim
     echo ""
 
+    # Update duf
+    echo $fg[green]"Updating duf..."$reset_color
+    brew install duf
+    echo ""
+
     # # Update lsd
     # echo $fg[green]"Updating lsd..."$reset_color
     # brew install lsd
@@ -195,6 +200,11 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # Update neovim
     echo $fg[green]"Updating neovim..."$reset_color
     sudo snap refresh nvim
+    echo ""
+
+    # Update duf
+    echo $fg[green]"Updating duf..."$reset_color
+    sudo apt-get --only-upgrade install duf -y
     echo ""
 
     # # Update lsd
