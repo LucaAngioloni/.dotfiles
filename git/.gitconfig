@@ -11,6 +11,7 @@
 	rebase = false
 [core]
 	excludesFile = ~/.config/git/global_gitignore
+	editor = vim
 [init]
     defaultBranch = main
 [pretty]
