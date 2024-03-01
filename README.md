@@ -450,6 +450,12 @@ This serves 2 purposes:
 
 Install using `brew bundle install` while in the root directory of this repo where the `Brewfile` is.
 
+#### To create / update the Brewfile
+
+```bash
+brew bundle dump
+```
+
 ### Notable Python packages
 
 ```bash
