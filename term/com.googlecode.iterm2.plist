@@ -7,7 +7,7 @@
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>Command</key>
-	<string>/usr/local/bin/zsh</string>
+	<string>zsh</string>
 	<key>CompactMinimalTabBarHeight</key>
 	<real>40</real>
 	<key>Custom Color Presets</key>
@@ -4116,7 +4116,7 @@
 			<key>Columns</key>
 			<integer>115</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/zsh</string>
+			<string>zsh</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -4872,7 +4872,7 @@
 			<key>Columns</key>
 			<integer>115</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/zsh</string>
+			<string>zsh</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -5604,7 +5604,7 @@
 			<key>Columns</key>
 			<integer>115</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/zsh</string>
+			<string>zsh</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -5647,7 +5647,7 @@
 			<key>Cursor Type</key>
 			<integer>2</integer>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -6353,7 +6353,7 @@
 			<key>Columns</key>
 			<integer>115</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/zsh -i</string>
+			<string>zsh -i</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -6396,7 +6396,7 @@
 			<key>Cursor Type</key>
 			<integer>2</integer>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -7422,7 +7422,7 @@
 			<key>Columns</key>
 			<integer>115</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/zsh</string>
+			<string>zsh</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -8331,7 +8331,7 @@
 			<key>Columns</key>
 			<integer>115</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/zsh</string>
+			<string>zsh</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -9370,7 +9370,7 @@
 											<key>Columns</key>
 											<integer>115</integer>
 											<key>Command</key>
-											<string>/usr/local/bin/zsh</string>
+											<string>zsh</string>
 											<key>Cursor Color</key>
 											<dict>
 												<key>Alpha Component</key>
@@ -10091,7 +10091,7 @@
 										<key>Program</key>
 										<dict>
 											<key>Command</key>
-											<string>/usr/local/bin/zsh</string>
+											<string>zsh</string>
 											<key>Type</key>
 											<string>Command</string>
 										</dict>

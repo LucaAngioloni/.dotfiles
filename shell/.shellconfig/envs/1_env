@@ -12,20 +12,18 @@ export PATH=~/.cargo/bin:$PATH
 export PATH=~/.local/bin:$PATH
 
 if [ "$PLATFORM"  = 'mac' ]; then
-    # added by Anaconda3 installer
-    export PATH="$HOME/anaconda3/bin:$PATH"
-    alias pip3="$HOME/anaconda3/bin/pip"
-    alias python3="$HOME/anaconda3/bin/python"
-
-    # Removes the (env-name) when activating an environment. It is redundant since the spaceship and powerllevel10k themes do this already (better). If the theme is changed re-activate this
-    # conda config --set changeps1 False
-
     # Homebrew has a different path on M1
     # You would find the path by running `brew --prefix`
     # It is slow to run `brew --prefix` every time, so I have hardcoded the path here
     if [ "$ARCHITECTURE" = 'arm64' ]; then
         export PATH="/opt/homebrew/bin:$PATH"
         export PATH="/opt/homebrew/sbin:$PATH"
+
+        # added by Anaconda3 installer in Homebrew
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+
+        # Removes the (env-name) when activating an environment. It is redundant since the spaceship and powerllevel10k themes do this already (better). If the theme is changed re-activate this
+        # conda config --set changeps1 False
 
         #Ruby
         export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
@@ -37,6 +35,14 @@ if [ "$PLATFORM"  = 'mac' ]; then
     else
         export PATH="/usr/local/bin:$PATH"
         export PATH="/usr/local/sbin:$PATH"
+
+        # added by Anaconda3 installer
+        export PATH="$HOME/anaconda3/bin:$PATH"
+        alias pip3="$HOME/anaconda3/bin/pip"
+        alias python3="$HOME/anaconda3/bin/python"
+
+        # Removes the (env-name) when activating an environment. It is redundant since the spaceship and powerllevel10k themes do this already (better). If the theme is changed re-activate this
+        # conda config --set changeps1 False
 
         #Ruby
         export PATH="/usr/local/opt/ruby/bin:$PATH"

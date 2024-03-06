@@ -28,3 +28,5 @@ alias ncdu='ncdu --color dark'
 alias dsrm='find . -name ".DS_Store" -type f -delete'
 
 alias clone='git clone'
+
+alias code='vscode'
