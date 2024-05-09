@@ -41,7 +41,8 @@ z() {
 }
 
 # remap keybindings
-bindkey '\ef' fzf-file-widget
+bindkey '^F' fzf-file-widget
+bindkey '\ed' fzf-file-widget # At the moment I cannot set it to '\ef' because alt and right arrow would trigger this.
 bindkey '\ec' fzf-cd-widget
 
 
