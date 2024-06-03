@@ -4,10 +4,11 @@
 
 export MY_LS_COMMAND="colorls"
 
-setopt APPEND_HISTORY # adds history
+setopt APPEND_HISTORY # append to the history file instead of overwriting it
 # setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
 setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
-setopt HIST_REDUCE_BLANKS
+setopt HIST_REDUCE_BLANKS # remove leading/trailing blanks from history lines
+setopt HIST_IGNORE_SPACE # ignore commands that start with a space
 
 # These need to be sourced in order
 if [ "$PLATFORM"  = 'mac' ]; then
