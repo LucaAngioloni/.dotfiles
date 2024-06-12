@@ -62,6 +62,8 @@ elif [ "$PLATFORM"  = 'linux' ]; then
     # : # empty command, remove if you add something here
     export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
     export PATH=/snap/bin:$PATH
+
+    export PATH="/home/luca/miniconda3/bin:$PATH"
 fi
 
 # GPG TTY
