@@ -57,7 +57,7 @@ if [ "$PLATFORM"  = 'mac' ]; then
     #Ruby
     export PATH="$(gem environment | grep "EXECUTABLE DIRECTORY" | awk '{print $4}'):$PATH"
 
-    export EDITOR='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+    # export EDITOR="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
 elif [ "$PLATFORM"  = 'linux' ]; then
     # : # empty command, remove if you add something here
     export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap

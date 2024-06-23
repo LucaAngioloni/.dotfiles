@@ -2,7 +2,6 @@
 
 if [ "$PLATFORM"  = 'mac' ]; then
     alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-    alias vscode='/Applications/Visual\ Studio\ Code.app/contents/Resources/app/bin/code'
 
     alias newtab='open . -a iterm'
     alias show='qlmanage -p'

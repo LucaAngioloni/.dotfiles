@@ -256,6 +256,16 @@ if [ "$PLATFORM"  = 'mac' ]; then
     # echo $fg[green]"Installing lsd..."$reset_color
     # brew install lsd
     # echo ""
+
+    # Install jq
+    echo $fg[green]"Installing jq..."$reset_color
+    brew install jq
+    echo ""
+
+    # Install yazi
+    echo $fg[green]"Installing yazi..."$reset_color
+    brew install yazi ffmpegthumbnailer unar poppler font-symbols-only-nerd-font
+    echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     mkdir -p ~/.local/bin # For fd and bat
@@ -362,6 +372,18 @@ EOF
     # # Install lsd
     # echo $fg[green]"Installing lsd..."$reset_color
     # sudo apt-get install lsd -y
+    # echo ""
+
+    # Install jq
+    echo $fg[green]"Installing jq..."$reset_color
+    sudo apt-get install jq -y
+    echo ""
+
+    # Still not easy to make an installation script for yazi that works on any linux distro (debian)
+    # # Install yazi
+    # echo $fg[green]"Installing yazi..."$reset_color
+    # sudo apt-get install ffmpegthumbnailer unar poppler-utils -y
+    # sudo apt-get install yazi -y
     # echo ""
 fi
 

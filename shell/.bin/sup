@@ -138,6 +138,16 @@ if [ "$PLATFORM"  = 'mac' ]; then
     # echo $fg[green]"Updating lsd..."$reset_color
     # brew install lsd
     # echo ""
+
+    # Update jq
+    echo $fg[green]"Updating jq..."$reset_color
+    brew install jq
+    echo ""
+
+    # Update yazi
+    echo $fg[green]"Updating yazi..."$reset_color
+    brew install yazi ffmpegthumbnailer unar poppler font-symbols-only-nerd-font
+    echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     sudo apt-get update
@@ -211,6 +221,11 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # echo $fg[green]"Updating lsd..."$reset_color
     # sudo apt-get --only-upgrade install lsd -y
     # echo ""
+
+    # Update jq
+    echo $fg[green]"Updating jq..."$reset_color
+    sudo apt-get --only-upgrade install jq -y
+    echo ""
 fi
 
 if [ -d "$HOME/.config/nvim" ]; then
