@@ -30,8 +30,8 @@ if [ "$PLATFORM"  = 'mac' ]; then
 
         #Google Cloud
         export CLOUDSDK_PYTHON="/opt/homebrew/opt/python@3/libexec/bin/python"
-        source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-        source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+        source "/opt/homebrew/share/google-cloud-sdk/path.zsh.inc"
+        source "/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc"
     else
         export PATH="/usr/local/bin:$PATH"
         export PATH="/usr/local/sbin:$PATH"
