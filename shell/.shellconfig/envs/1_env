@@ -7,9 +7,9 @@ export PATH
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
-export PATH=~/.bin:$PATH
-export PATH=~/.cargo/bin:$PATH
-export PATH=~/.local/bin:$PATH
+export PATH="~/.bin:$PATH"
+export PATH="~/.cargo/bin:$PATH"
+export PATH="~/.local/bin:$PATH"
 
 if [ "$PLATFORM"  = 'mac' ]; then
     # Homebrew has a different path on M1
@@ -52,7 +52,7 @@ if [ "$PLATFORM"  = 'mac' ]; then
         source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
         source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
     fi
-    export PATH=$HOME/bin:$PATH
+    export PATH="$HOME/bin:$PATH"
 
     #Ruby
     export PATH="$(gem environment | grep "EXECUTABLE DIRECTORY" | awk '{print $4}'):$PATH"
@@ -60,10 +60,10 @@ if [ "$PLATFORM"  = 'mac' ]; then
     # export EDITOR="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
 elif [ "$PLATFORM"  = 'linux' ]; then
     # : # empty command, remove if you add something here
-    export PATH=~/.gem/bin:$PATH # Ruby gems if installed with snap
-    export PATH=/snap/bin:$PATH
+    export PATH="~/.gem/bin:$PATH" # Ruby gems if installed with snap
+    export PATH="/snap/bin:$PATH" # Snap
 
-    export PATH="/home/luca/miniconda3/bin:$PATH"
+    export PATH="$HOME/miniconda3/bin:$PATH"
 fi
 
 # GPG TTY
