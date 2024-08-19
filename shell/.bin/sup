@@ -157,9 +157,14 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # curl -sS https://starship.rs/install.sh | sh
     # echo ""
 
+    # # Update thefuck
+    # echo $fg[green]"Updating thefuck..."$reset_color
+    # pip3 install thefuck --user --upgrade --break-system-packages
+    # echo ""
+
     # Update thefuck
     echo $fg[green]"Updating thefuck..."$reset_color
-    pip3 install thefuck --user --upgrade --break-system-packages
+    sudo snap refresh thefuck
     echo ""
 
     # Update fd

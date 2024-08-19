@@ -280,15 +280,19 @@ if [ "$PLATFORM"  = 'linux' ]; then
     sudo apt-get install build-essential -y
     echo ""
 
-    # Install thefuck
-    if ! command_exists pip3; then
-        echo $fg[green]"Installing pip3..."$reset_color
-        sudo apt-get install python3-dev python3-pip python3-setuptools -y
-        echo ""
-    fi
+    # # Install thefuck
+    # if ! command_exists pip3; then
+    #     echo $fg[green]"Installing pip3..."$reset_color
+    #     sudo apt-get install python3-dev python3-pip python3-setuptools -y
+    #     echo ""
+    # fi
+
+    # echo $fg[green]"Installing thefuck..."$reset_color
+    # pip3 install thefuck --user --upgrade --break-system-packages
+    # echo ""
 
     echo $fg[green]"Installing thefuck..."$reset_color
-    pip3 install thefuck --user --upgrade --break-system-packages
+    sudo snap install --beta thefuck --classic
     echo ""
 
     # Install fd
