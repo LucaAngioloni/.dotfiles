@@ -283,12 +283,12 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # Install thefuck
     if ! command_exists pip3; then
         echo $fg[green]"Installing pip3..."$reset_color
-        sudo apt-get install python3-pip -y
+        sudo apt-get install python3-dev python3-pip python3-setuptools -y
         echo ""
     fi
 
     echo $fg[green]"Installing thefuck..."$reset_color
-    pip3 install thefuck --upgrade
+    pip3 install thefuck --user --upgrade
     echo ""
 
     # Install fd
