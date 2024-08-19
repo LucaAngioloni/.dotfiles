@@ -159,7 +159,7 @@ if [ "$PLATFORM"  = 'linux' ]; then
 
     # Update thefuck
     echo $fg[green]"Updating thefuck..."$reset_color
-    pip3 install thefuck --user --upgrade
+    pip3 install thefuck --user --upgrade --break-system-packages
     echo ""
 
     # Update fd
