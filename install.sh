@@ -124,6 +124,13 @@ if [ "$PLATFORM"  = 'mac' ]; then
     echo $fg[green]"Installing git..."$reset_color
     brew install git
     echo ""
+
+    # On mac we need to add a non standard shell to the /etc/shells file
+    # so that when oh-my-zsh tryies to change the shell it doesn't fail
+    # in case you have zsh installed through brew
+    echo $fg[green]"Adding zsh to standard shells..."$reset_color
+    echo /usr/local/bin/zsh | sudo tee -a /etc/shells
+    echo ""
 elif [ "$PLATFORM"  = 'linux' ]; then
     echo $fg[green]"Updating Aptic Packages..."$reset_color
     sudo apt-get update -y
