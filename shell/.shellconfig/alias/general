@@ -8,9 +8,13 @@
 alias npmup='npm install npm -g; npm update -g;'
 alias rubyup='sudo gem update --system; sudo gem update; sudo gem cleanup'
 
-alias ydl='youtube-dl'
-alias ydl-a='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
-alias youtube-dl-audio='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
+# youtube-dl is no longer maintained, use yt-dlp instead
+# alias ydl='youtube-dl'
+# alias ydl-a='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
+# alias youtube-dl-audio='youtube-dl --ignore-errors --output "%(title)s.%(ext)s" --extract-audio --audio-format mp3'
+
+alias ydl='yt-dlp'
+alias ydl-a='yt-dlp -f bestaudio -x --audio-format mp3'
 
 # Not needed, use esc twice with the thefuck ohmyzsh plugin
 # eval "$(thefuck --alias)"
