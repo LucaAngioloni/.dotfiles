@@ -8,7 +8,7 @@
 	email = lucaangioloni@gmail.com
 	# signingkey = xxxxxxxxxxxxxxxxx
 [pull]
-	rebase = true
+	rebase = false
 [core]
 	excludesFile = ~/.config/git/global_gitignore
 	editor = vim
