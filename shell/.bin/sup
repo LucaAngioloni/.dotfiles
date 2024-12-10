@@ -233,12 +233,12 @@ if [ "$PLATFORM"  = 'linux' ]; then
     echo ""
 fi
 
-if [ -d "$HOME/.config/nvim" ]; then
-    echo $fg[green]"Updating Nvchad..."$reset_color
-    cd "$HOME/.config/nvim"
-    git pull --depth=20
-    echo ""
-fi
+# if [ -d "$HOME/.config/nvim" ]; then
+#     echo $fg[green]"Updating Nvchad..."$reset_color
+#     cd "$HOME/.config/nvim"
+#     git pull --depth=20
+#     echo ""
+# fi
 
 # -----------------------------------------------------------------------------
 

@@ -368,8 +368,12 @@ sudo snap install nvim --classic
 ### NVChad
 
 ```bash
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 ```
+
+- Run `:MasonInstallAll` command after lazy.nvim finishes downloading plugins.
+- Delete the `.git` folder from nvim folder `~/.config/nvim`.
+- Learn customization of ui & base46 from `:h nvui`.
 
 ### DUF
 
@@ -419,7 +423,7 @@ N.B. The font must be installed in the system and it is needed to show icons and
 
 On Mac use iTerm2. Themes and configurations are in the `term` folder.
 
-In iTerm2 go to *Preferences* and then *General* and click on *Load preferences from a custom folder or URL* and select the `com.googlecode.iterm2.plist` file.
+In iTerm2 go to _Preferences_ and then _General_ and click on _Load preferences from a custom folder or URL_ and select the `com.googlecode.iterm2.plist` file.
 
 ### Speedup
 
@@ -427,7 +431,7 @@ Installing **git** with brew instead of using the **Apple git** seems to speed t
 
 Also accepting the terms of the xcodebuild licence seems to help: `sudo xcodebuild -license accept`.
 
-To make startup faster set in the *General* tab of *Profile* in *Command*:
+To make startup faster set in the _General_ tab of _Profile_ in _Command_:
 
 **Command**: `/usr/local/bin/zsh -i`
 
@@ -435,7 +439,7 @@ This should completely skip the login phase.
 
 #### Old config
 
-To make startup faster set in the *General* tab of *Profile* in *Command*:
+To make startup faster set in the _General_ tab of _Profile_ in _Command_:
 
 **Command**: `login -fq lucaangioloni /usr/local/bin/zsh -il`
 

@@ -398,11 +398,11 @@ EOF
     # echo ""
 fi
 
-if [ ! -d "$HOME/.config/nvim" ]; then
-    echo $fg[green]"Installing nvchad..."$reset_color
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-    echo ""
-fi
+# if [ ! -d "$HOME/.config/nvim" ]; then
+#     echo $fg[green]"Installing nvchad..."$reset_color
+#     git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+#     echo ""
+# fi
 
 echo $fg[green]"Installing .dotfiles..."$reset_color
 git clone https://github.com/LucaAngioloni/.dotfiles.git ~/.dotfiles
