@@ -60,7 +60,7 @@ if [ "$PLATFORM"  = 'mac' ]; then
     # export EDITOR="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
 elif [ "$PLATFORM"  = 'linux' ]; then
     # : # empty command, remove if you add something here
-    export PATH="~/.gem/bin:$PATH" # Ruby gems if installed with snap
+    export PATH="$HOME/.gem/bin:$PATH" # Ruby gems if installed with snap
     export PATH="/snap/bin:$PATH" # Snap
 
     export PATH="$HOME/miniconda3/bin:$PATH"
