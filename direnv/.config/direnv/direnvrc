@@ -1,5 +1,8 @@
 layout_anaconda() {
-  source $HOME/.shellconfig/env
+  # Source envs
+  for env_file in ~/.shellconfig/envs/***/*; do
+    source "$env_file"
+  done
   source $HOME/.shellconfig/plugins/functions/condaenv
   condaenv $@
 }
