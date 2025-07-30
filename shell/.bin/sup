@@ -234,6 +234,13 @@ if [ "$PLATFORM"  = 'linux' ]; then
     echo ""
 fi
 
+# If conda command is available, update conda itself
+if command -v conda &> /dev/null; then
+    echo $fg[green]"Updating conda..."$reset_color
+    conda update -n base -c defaults conda -y
+    echo ""
+fi
+
 # if [ -d "$HOME/.config/nvim" ]; then
 #     echo $fg[green]"Updating Nvchad..."$reset_color
 #     cd "$HOME/.config/nvim"

@@ -404,6 +404,8 @@ fi
 #     echo ""
 # fi
 
+echo $fg[red]"REMEMBER TO INSTALL MINICONDA!"$reset_color
+
 echo $fg[green]"Installing .dotfiles..."$reset_color
 git clone https://github.com/LucaAngioloni/.dotfiles.git ~/.dotfiles
 if [ -f ~/.zshrc ]; then
