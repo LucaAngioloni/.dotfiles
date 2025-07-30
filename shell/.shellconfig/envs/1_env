@@ -16,15 +16,16 @@ if [ "$PLATFORM"  = 'mac' ]; then
     export PATH="/usr/local/sbin:$PATH"
     export PATH="$HOME/bin:$PATH"
 
+    export PATH="/opt/miniconda3/bin:$PATH" # Miniconda3
+
+    export PATH="$PATH:$HOME/.cache/lm-studio/bin" # Added by LM Studio CLI (lms)
+
     # Homebrew has a different path on M1
     # You would find the path by running `brew --prefix`
     # It is slow to run `brew --prefix` every time, so I have hardcoded the path here
     if [ "$ARCHITECTURE" = 'arm64' ]; then
         export PATH="/opt/homebrew/bin:$PATH"
         export PATH="/opt/homebrew/sbin:$PATH"
-
-        # added by Anaconda3 installer in Homebrew
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
 
         # Removes the (env-name) when activating an environment. It is redundant since the spaceship and powerllevel10k themes do this already (better). If the theme is changed re-activate this
         # conda config --set changeps1 False
@@ -37,11 +38,6 @@ if [ "$PLATFORM"  = 'mac' ]; then
         source "/opt/homebrew/share/google-cloud-sdk/path.zsh.inc"
         source "/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc"
     else
-        # added by Anaconda3 installer
-        export PATH="$HOME/anaconda3/bin:$PATH"
-        alias pip3="$HOME/anaconda3/bin/pip"
-        alias python3="$HOME/anaconda3/bin/python"
-
         # Removes the (env-name) when activating an environment. It is redundant since the spaceship and powerllevel10k themes do this already (better). If the theme is changed re-activate this
         # conda config --set changeps1 False
 
