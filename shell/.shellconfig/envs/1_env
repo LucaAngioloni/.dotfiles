@@ -62,6 +62,8 @@ elif [ "$PLATFORM"  = 'linux' ]; then
     export PATH="$HOME/miniconda3/bin:$PATH"
 fi
 
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1 # Disable Azure Functions Core Tools telemetry
+
 # GPG TTY
 export GPG_TTY=$(tty)
 
