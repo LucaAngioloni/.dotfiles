@@ -273,6 +273,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     echo $fg[green]"Installing yazi..."$reset_color
     brew install yazi ffmpegthumbnailer unar poppler font-symbols-only-nerd-font
     echo ""
+
+    # Install just
+    echo $fg[green]"Installing just..."$reset_color
+    brew install just
+    echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     mkdir -p ~/.local/bin # For fd and bat
@@ -396,6 +401,11 @@ EOF
     # sudo apt-get install ffmpegthumbnailer unar poppler-utils -y
     # sudo apt-get install yazi -y
     # echo ""
+
+    # Install just
+    echo $fg[green]"Installing just..."$reset_color
+    sudo apt-get install just -y
+    echo ""
 fi
 
 # if [ ! -d "$HOME/.config/nvim" ]; then

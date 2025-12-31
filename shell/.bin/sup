@@ -149,6 +149,11 @@ if [ "$PLATFORM"  = 'mac' ]; then
     echo $fg[green]"Updating yazi..."$reset_color
     brew install yazi ffmpegthumbnailer unar poppler font-symbols-only-nerd-font
     echo ""
+
+    # Update just
+    echo $fg[green]"Updating just..."$reset_color
+    brew install just
+    echo ""
 fi
 if [ "$PLATFORM"  = 'linux' ]; then
     sudo apt-get update
@@ -231,6 +236,17 @@ if [ "$PLATFORM"  = 'linux' ]; then
     # Update jq
     echo $fg[green]"Updating jq..."$reset_color
     sudo apt-get --only-upgrade install jq -y
+    echo ""
+
+    # Update yazi
+    # echo $fg[green]"Updating yazi..."$reset_color
+    # sudo apt-get --only-upgrade install yazi ffmpegthumbnailer unar poppler-utils -y
+    # sudo apt-get --only-upgrade install yazi -y
+    # echo ""
+
+    # Update just
+    echo $fg[green]"Updating just..."$reset_color
+    sudo apt-get --only-upgrade install just -y
     echo ""
 fi
 
