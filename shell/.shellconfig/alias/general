@@ -35,3 +35,5 @@ alias pycrm='find . -name "__pycache__" -type d -delete'
 alias clone='git clone'
 
 alias code='vscode'
+
+alias j='just'
