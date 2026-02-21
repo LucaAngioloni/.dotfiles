@@ -37,3 +37,8 @@ alias clone='git clone'
 alias code='vscode'
 
 alias j='just'
+
+# Scanner lan script
+alias lanscan='~/.scripts/lan_scanner.py'
+alias lan_scan='~/.scripts/lan_scanner.py'
+alias lanscanner=''~/.scripts/lan_scanner.py''

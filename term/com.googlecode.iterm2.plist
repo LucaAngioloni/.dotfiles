@@ -29,7 +29,7 @@ The command should do this: \(ai.prompt)</string>
 	<key>AiMaxTokens</key>
 	<integer>160000</integer>
 	<key>AiModel</key>
-	<string>accounts/fireworks/models/deepseek-v3-0324</string>
+	<string>accounts/fireworks/models/kimi-k2p5</string>
 	<key>AiResponseMaxTokens</key>
 	<integer>32768</integer>
 	<key>AitermURL</key>
