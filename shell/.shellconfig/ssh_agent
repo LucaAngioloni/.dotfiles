@@ -1,0 +1,32 @@
+# Check if agent is already available (Ubuntu Desktop, macOS handle this automatically)
+if [[ "$OSTYPE" == linux* ]]; then
+    ssh-add -l &>/dev/null
+    agent_status=$?
+
+    if [[ $agent_status -eq 2 ]]; then
+        # Exit 2 = can't connect to agent - need to set up manually
+
+        # Linux: Use systemd user service socket if available (server setup)
+        if [[ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
+            export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+        else
+            # Fallback: start ssh-agent manually for this session only
+            eval "$(ssh-agent -s)" &>/dev/null
+        fi
+
+        # Auto-add default key if present and not already loaded
+        # Prioritize Ed25519 (modern) over RSA, check for other common keys
+        default_key=""
+        for key in ~/.ssh/id_ed25519 ~/.ssh/id_rsa ~/.ssh/id_ecdsa; do
+            if [[ -f "$key" ]]; then
+                default_key="$key"
+                break
+            fi
+        done
+
+        if [[ -n "$default_key" ]]; then
+            ssh-add -l &>/dev/null || ssh-add "$default_key" 2>/dev/null
+        fi
+
+    fi
+fi

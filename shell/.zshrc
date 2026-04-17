@@ -42,4 +42,6 @@ for function_folder in ~/.functions/*(/); do
     autoload -Uz $function_folder/*(.:t);
 done;
 
+source ~/.shellconfig/ssh_agent
+
 [ -z "$ZPROF" ] || zprof

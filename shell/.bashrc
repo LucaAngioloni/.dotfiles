@@ -50,3 +50,5 @@ done
 for function_file in ~/.functions/*; do
 source "$function_file"
 done
+
+source ~/.shellconfig/ssh_agent

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# lazydocker wrapper - hybrid native/Docker approach
+# Use `lzd` or `lazydocker`
+
+lzd() {
+    # Option 1: Use native lazydocker if available
+    if ! alias lazydocker >/dev/null 2>&1 && command -v lazydocker >/dev/null 2>&1; then
+        command lazydocker "$@"
+        return $?
+    fi
+
+    # Option 2: Build and run from Docker
+
+    local image="local/lazydocker"
+
+    # Build only if image doesn't exist
+    if ! docker image inspect "$image" >/dev/null 2>&1; then
+        echo "Building local/lazydocker with current Docker client..."
+        docker build -t "$image" \
+            --build-arg DOCKER_VERSION="29.x" \
+            https://github.com/jesseduffield/lazydocker.git
+        # Update the docker version above if needed in the future
+    fi
+
+    docker run --rm -it \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v ~/.config/lazydocker:/root/.config/jesseduffield/lazydocker \
+        "$image"
+}
+
+# Alias for convenience
+alias lazydocker='lzd'

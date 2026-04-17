@@ -1,0 +1,65 @@
+#!/bin/zsh
+# setup-ssh-agent-service.sh - Run once per server to enable persistent ssh-agent
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    # Do nothing and exit successfully on macOS, since it handles ssh-agent automatically
+    echo "macOS detected - ssh-agent is managed by the system, no setup needed."
+    exit 0
+fi
+
+set -e
+
+SERVICE_DIR="$HOME/.config/systemd/user"
+SERVICE_FILE="$SERVICE_DIR/ssh-agent.service"
+
+# Check if systemd user services are supported
+if ! systemctl --version &>/dev/null; then
+    echo "Error: systemd not found"
+    exit 1
+fi
+
+# Create directory if needed
+mkdir -p "$SERVICE_DIR"
+
+# Create the service file
+cat > "$SERVICE_FILE" << 'EOF'
+[Unit]
+Description=SSH key agent
+Documentation=man:ssh-agent(1)
+
+[Service]
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a %t/ssh-agent.socket
+ExecStop=/bin/kill -TERM $MAINPID
+
+[Install]
+WantedBy=default.target
+EOF
+
+echo "Created: $SERVICE_FILE"
+
+# Reload daemon and enable service
+systemctl --user daemon-reload
+systemctl --user enable ssh-agent
+
+# Stop any existing agent to avoid conflicts
+systemctl --user stop ssh-agent 2>/dev/null || true
+
+# Start the service
+systemctl --user start ssh-agent
+
+# Verify
+sleep 0.5
+if systemctl --user is-active ssh-agent &>/dev/null; then
+    echo "Success: ssh-agent is running"
+    echo "Socket: $XDG_RUNTIME_DIR/ssh-agent.socket"
+    echo ""
+    echo "Next steps:"
+    echo "1. Reload your shell or run: export SSH_AUTH_SOCK=\"\$XDG_RUNTIME_DIR/ssh-agent.socket\""
+    echo "2. Add your keys: ssh-add ~/.ssh/id_rsa"
+else
+    echo "Error: Service failed to start"
+    systemctl --user status ssh-agent --no-pager
+    exit 1
+fi
