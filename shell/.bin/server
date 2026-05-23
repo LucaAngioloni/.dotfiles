@@ -1,52 +1,131 @@
 # shellcheck disable=SC2148
 
 server(){
-    local usage="Usage: server [auth <user> <pssw> | php [local(host)|ip] | python [upload] | refresh]"
-    if [[ $# == 0 ]]; then
-        python3 -m http.server --bind 0.0.0.0
-    else
-        if [[ $# != 0 ]]; then
-            if [[ $1 == "php" ]]; then
-                if [[ $# == 1 ]]; then
-                    php -S localhost:8000
-                else
-                    if [[ $2 == "local" ]]; then
-                        php -S localhost:8000
-                    elif [[ $2 == "localhost" ]]; then
-                        php -S localhost:8000
-                    elif [[ $2 == "ip" ]]; then
-                        # shellcheck disable=SC2046
-                        php -S $(ipconfig getifaddr en0):8000 # automatically gets IP but only if connected to network
-                    else
-                        echo "$usage"
-                    fi
-                fi
-            elif [[ $1 == "python" ]]; then
-                if [[ $# == 1 ]]; then
-                    python3 -m http.server --bind 0.0.0.0
-                else
-                    if [[ $2 == "upload" ]]; then
-                        ~/.scripts/python_server.py
-                    else
-                        python3 -m http.server --bind 0.0.0.0
-                    fi
-                fi
-            elif [[ $1 == "auth" ]]; then
-                if [[ $# == 1 ]]; then
-                    echo "$usage"
-                else
-                    http-server-with-auth ./ --username "$2" --password "$3"
-                fi
-            elif [[ $1 == "refresh" ]]; then
-                # shellcheck disable=SC2046
-                browser-sync start -s -f . --no-notify --host $(ipconfig getifaddr en0) --port 9000
-            else
+    local usage="Usage: server [TYPE] [OPTIONS]
+
+Types:
+  python [upload]           Python HTTP server (default)
+  php [local|ip]            PHP development server
+  auth <user> <pass>        Authenticated HTTP server
+  refresh                   Browser-sync with auto-reload
+
+Options:
+  -p, --port PORT          Server port (default: 8000)
+  -b, --bind ADDRESS       Bind address (default: 0.0.0.0)
+  -d, --directory DIR      Serve directory (default: current)
+  -h, --help               Show this help"
+
+    local type="python"
+    local type_args=()
+    local port=""
+    local bind=""
+    local directory="."
+    local i=0
+
+    while [[ $i -lt $# ]]; do
+        i=$((i + 1))
+        local arg="${!i}"
+
+        case "$arg" in
+            -h|--help)
                 echo "$usage"
+                return 0
+                ;;
+            -p|--port)
+                i=$((i + 1))
+                if [[ $i -le $# ]]; then
+                    port="${!i}"
+                else
+                    echo "Error: $arg requires a value" >&2
+                    return 1
+                fi
+                ;;
+            -b|--bind)
+                i=$((i + 1))
+                if [[ $i -le $# ]]; then
+                    bind="${!i}"
+                else
+                    echo "Error: $arg requires a value" >&2
+                    return 1
+                fi
+                ;;
+            -d|--directory)
+                i=$((i + 1))
+                if [[ $i -le $# ]]; then
+                    directory="${!i}"
+                else
+                    echo "Error: $arg requires a value" >&2
+                    return 1
+                fi
+                ;;
+            -*)
+                echo "Error: Unknown option $arg" >&2
+                echo "$usage" >&2
+                return 1
+                ;;
+            *)
+                if [[ -z "$type_set" ]]; then
+                    type="$arg"
+                    type_set=1
+                else
+                    type_args+=("$arg")
+                fi
+                ;;
+        esac
+    done
+
+    local default_port=8000
+    local default_bind="0.0.0.0"
+    local final_port="${port:-$default_port}"
+    local final_bind="${bind:-$default_bind}"
+
+    case "$type" in
+        python)
+            if [[ "${type_args[0]}" == "upload" ]]; then
+                ~/.scripts/python_server.py "$directory"
+            else
+                python3 -m http.server "$final_port" --bind "$final_bind" --directory "$directory"
             fi
-        else
-            python3 -m http.server --bind 0.0.0.0
-        fi
-    fi
+            ;;
+        php)
+            local php_host
+            if [[ -z "${type_args[0]}" ]] || [[ "${type_args[0]}" == "local" ]] || [[ "${type_args[0]}" == "localhost" ]]; then
+                php_host="localhost:$final_port"
+            elif [[ "${type_args[0]}" == "ip" ]]; then
+                # shellcheck disable=SC2046
+                php_host="$(ipconfig getifaddr en0):$final_port"
+            else
+                echo "Error: Unknown PHP option '${type_args[0]}'" >&2
+                echo "Usage: server php [local|ip] [options]" >&2
+                return 1
+            fi
+            php -S "$php_host" -t "$directory"
+            ;;
+        auth)
+            if [[ ${#type_args[@]} -lt 2 ]]; then
+                echo "Error: auth requires username and password" >&2
+                echo "Usage: server auth <user> <pass> [options]" >&2
+                return 1
+            fi
+            http-server-with-auth "$directory" --username "${type_args[0]}" --password "${type_args[1]}" --port "$final_port" --bind "$final_bind"
+            ;;
+        refresh)
+            local refresh_port="${port:-9000}"
+            local refresh_host
+            if [[ -n "$bind" ]]; then
+                refresh_host="$bind"
+            else
+                # shellcheck disable=SC2046
+                refresh_host="$(ipconfig getifaddr en0)"
+            fi
+            browser-sync start -s -f "$directory" --no-notify --host "$refresh_host" --port "$refresh_port"
+            ;;
+        *)
+            echo "Error: Unknown server type '$type'" >&2
+            echo "$usage" >&2
+            return 1
+            ;;
+    esac
 }
 
 server "$@"
