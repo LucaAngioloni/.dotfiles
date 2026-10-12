@@ -1,0 +1,13 @@
+# shellcheck disable=SC2148
+
+# pnpm
+case "$(uname -s)" in
+  Darwin) PNPM_HOME="${PNPM_HOME:-$HOME/Library/pnpm}" ;;
+  *) PNPM_HOME="${PNPM_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/pnpm}" ;;
+esac
+export PNPM_HOME
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) [ -d "$PNPM_HOME" ] && export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

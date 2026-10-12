@@ -25,6 +25,9 @@ export FZF_DEFAULT_OPTS="
 # On debian it needs to be created (see the README.md)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Modern fzf is sourced like this:
+# source <(fzf --zsh)
+
 # for more info see fzf/shell/completion.zsh
 _fzf_compgen_path() {
     fd . "$1"
